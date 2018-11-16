@@ -1,0 +1,24 @@
+
+ <%= form_with(model:creator_metric, local: true,class:'form-horizontal') do |form| %>
+                <div class="form-group"><label class="col-sm-2 control-label">指标 </label>
+                  <div class="col-sm-10">
+                  
+                     <%= form.text_field:metric_name,class:'form-control' %>
+                  </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+
+                <div class="form-group"><label class="col-sm-2 control-label">数据 </label>
+                  <div class="col-sm-10">
+                
+                     <%= form.text_field:metric_value,class:'form-control' %>
+                  </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                  <%= form.hidden_field :creator_id,:value =>session['user_id']%>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                       <%= form.submit '保存',class:'btn btn-primary'%>
+                    </div>
+                </div>
+         <%end%>

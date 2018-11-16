@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Creator:</strong>
+  <%= @creator_metric.creator_id %>
+</p>
+
+<p>
+  <strong>Metric:</strong>
+  <%= @creator_metric.metric_id %>
+</p>
+
+<p>
+  <strong>Metric name:</strong>
+  <%= @creator_metric.metric_name %>
+</p>
+
+<p>
+  <strong>Metric value:</strong>
+  <%= @creator_metric.metric_value %>
+</p>
+
+<%= link_to 'Edit', edit_creator_metric_path(@creator_metric) %> |
+<%= link_to 'Back', creator_metrics_path %>

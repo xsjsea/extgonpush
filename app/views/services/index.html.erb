@@ -1,0 +1,54 @@
+ 
+  <div id="page-wrapper" class="gray-bg">
+      <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="ibox-title">
+          <h5>报价设置</h5>
+        </div>
+
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-sm-3">
+              <a class="btn btn-sm btn-primary m-t-n-xs" href="/services/new" role="button">
+                <strong>新增</strong>
+              </a>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>名称</th>
+                <th>报价</th>
+                <th>备注</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+              <tbody>
+            <%@services.each_with_index do |service,i| %>     
+              <tr>
+                <td><%=(i+1)%></td>
+                <td><%=service.service_name%></td>
+                <td><%=service.service_price%></td>
+                <td><%=service.service_description%></td>
+                <td>
+                  <%= link_to '编辑', edit_service_path(service) %>
+                 
+                  <a href="/services/destroy/<%=service.id%>">删除</a>
+                </td>
+              </tr>
+              <tr>
+              <%end%>
+              </tbody>
+            </table>
+            <%=will_paginate @services,:class=>"pagination",:previous_label=>"上一页",:next_label=>"下一页"%>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="pull-right">
+          <strong>GonPush.com</strong> &copy; 2018
+        </div>
+      </div>
+    </div>

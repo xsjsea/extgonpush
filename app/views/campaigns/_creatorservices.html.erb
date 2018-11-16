@@ -1,0 +1,10 @@
+ <div id="serviceModule">
+<%@services.each_with_index do |service,i| %>
+                        
+                          <h5>#<%=i%>：<%=service.service_name%></h5>
+                        <span class="text-navy small"><%=service.service_price%>元</span>
+                        <p><%=service.service_description%></p>
+                        <hr/>
+                        
+                        <%end%> 
+</div>

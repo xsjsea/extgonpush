@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  creator_id: 1
+  marketer_id: 1
+  campaigns_id: 1
+  contract_price: 1.5
+  down_payment_date: 2018-09-21 05:30:39
+  down_payment: 1.5
+  rest_payment_date: 2018-09-21 05:30:39
+  rest_payment: 1.5
+  contract_image: MyString
+  comment: MyString
+
+two:
+  creator_id: 1
+  marketer_id: 1
+  campaigns_id: 1
+  contract_price: 1.5
+  down_payment_date: 2018-09-21 05:30:39
+  down_payment: 1.5
+  rest_payment_date: 2018-09-21 05:30:39
+  rest_payment: 1.5
+  contract_image: MyString
+  comment: MyString

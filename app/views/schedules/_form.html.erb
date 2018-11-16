@@ -1,0 +1,57 @@
+<%= form_with(model: schedule, local: true) do |form| %>
+  <% if schedule.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(schedule.errors.count, "error") %> prohibited this schedule from being saved:</h2>
+
+      <ul>
+      <% schedule.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :campaign_id %>
+    <%= form.number_field :campaign_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :flow_name %>
+    <%= form.number_field :flow_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :flow_order %>
+    <%= form.number_field :flow_order %>
+  </div>
+
+  <div class="field">
+    <%= form.label :starts_on %>
+    <%= form.datetime_select :starts_on %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ends_on %>
+    <%= form.datetime_select :ends_on %>
+  </div>
+
+  <div class="field">
+    <%= form.label :workdays %>
+    <%= form.number_field :workdays %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.number_field :status %>
+  </div>
+
+  <div class="field">
+    <%= form.label :post_id %>
+    <%= form.number_field :post_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,51 @@
+<script type="text/javascript">
+  function submitfrm(){
+    var usertype=document.getElementById("usertype").value;
+    if(usertype==-1){
+      document.getElementById("notice").innerText="请选择身份";
+      return;
+    }
+    var username=document.getElementById("username").value;
+    if(username==-1){
+      document.getElementById("notice").innerText="请填写用户名";
+      return;
+    }
+
+    var truename=document.getElementById("truename").value;
+    if(truename==""){
+      document.getElementById("notice").innerText="请填写手机";
+      return;
+    }
+    var password=document.getElementById("password").value;
+    if(password==""){
+      document.getElementById("notice").innerText="请填写密码";
+      return;
+    }
+    document.getElementById("formregister").submit();
+  }
+</script>
+<h3>欢迎注册原力推平台</h3>
+        <p id="notice"><%= notice %></p>
+          <form action="/users" id="formregister" method="post">
+              <div class="form-group">
+                <select class="form-control m-b" id="usertype" name="usertype">
+                  <option value="-1">请选择身份</option>
+                  <option value="1">我是广告主</option>
+                  <option value="0">我是自媒体</option>
+                </select>  
+            </div>
+              <div class="form-group">
+            <input type="text" name="username" id="username" placeholder='昵称' class='form-control'/>
+              </div>
+              <div class="form-group">
+             <input type="text" name="truename" id="truename" placeholder='手机' class='form-control'/>    
+              </div>
+              <div class="form-group">
+                 <input type="password" id="password" name="password" laceholder='密码' class='form-control'/>
+              </div>
+              <input type="hidden" name="status" value="1"/>
+              <input type="button" onclick="submitfrm()" class="btn btn-primary block full-width m-b" value="注册"/>
+              </form>
+              <p class="text-muted text-center"><small>已经有注册账户?</small></p>
+              <a class="btn btn-sm btn-white btn-block" href="/login">立即登录</a>
+

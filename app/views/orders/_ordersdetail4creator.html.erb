@@ -1,0 +1,838 @@
+<style>
+.hidepart{display:none;}
+</style>
+<script type="text/javascript"> 
+  var xmlHttpReg = null; 
+  var currentseq=-1;
+  var orderstatus=-1;
+  function updatemessage(seq){
+    currentseq=seq;
+   var order_id=document.getElementById("order_id").value;
+ if (window.ActiveXObject) {
+                         xmlHttpReg = new ActiveXObject("Microsoft.XMLHTTP");            
+                          } 
+                          else if (window.XMLHttpRequest) {               
+                           xmlHttpReg = new XMLHttpRequest(); 
+                                     }           
+
+                               if (xmlHttpReg != null) {                
+                                   xmlHttpReg.open("post", "updatemessages?order_id="+order_id +"&order_step="+seq, true);                
+                                 xmlHttpReg.send();         
+                                 xmlHttpReg.onreadystatechange = doMessageResult; 
+                                                } 
+
+  }
+function doMessageResult() {                
+ if (xmlHttpReg.readyState == 4 && xmlHttpReg.status == 200) {  
+        document.getElementById("msg_"+currentseq).innerText ="";
+   //document.getElementById("post_div_"+currentseq).classList.add("hidepart");
+   //document.getElementById("post_p_"+currentseq).classList.add("hidepart");
+   //document.getElementById("post_a_"+currentseq).innerHTML=xmlHttpReg.responseText;
+ }
+}
+
+  function submitcomments(){
+   var order_id=document.getElementById("order_id").value;
+   var content_comment=document.getElementById("comments").value;
+ if (window.ActiveXObject) {
+                         xmlHttpReg = new ActiveXObject("Microsoft.XMLHTTP");            
+                          } 
+                          else if (window.XMLHttpRequest) {               
+                           xmlHttpReg = new XMLHttpRequest(); 
+                                     }           
+
+                               if (xmlHttpReg != null) {                
+                                   xmlHttpReg.open("post", "updatecomments?order_id="+order_id +"&content_comment="+content_comment, true);                
+                                 xmlHttpReg.send();         
+                                 xmlHttpReg.onreadystatechange = doCommentResult; 
+                                                } 
+
+  }
+  function doCommentResult() {                
+ if (xmlHttpReg.readyState == 4 && xmlHttpReg.status == 200) {  
+   alert('评价成功');
+   //document.getElementById("post_div_"+currentseq).classList.add("hidepart");
+   //document.getElementById("post_p_"+currentseq).classList.add("hidepart");
+   //document.getElementById("post_a_"+currentseq).innerHTML=xmlHttpReg.responseText;
+ }
+}
+  function editPost(seq){
+   document.getElementById("post_div_"+seq).classList.remove("hidepart");
+   document.getElementById("post_p_"+seq).classList.remove("hidepart");
+   document.getElementById("post_content_"+seq).classList.add("hidepart");
+ 
+
+  }
+   
+ 
+function updatepost(seq){
+     currentseq=seq;
+     var schedule_id=document.getElementById("post_schedule_"+seq).value;
+     var post_content=document.getElementById("post_input_"+seq).value;
+ 
+        
+     if (window.ActiveXObject) {
+                         xmlHttpReg = new ActiveXObject("Microsoft.XMLHTTP");            
+                          } 
+                          else if (window.XMLHttpRequest) {               
+                           xmlHttpReg = new XMLHttpRequest(); 
+                                     }           
+
+                               if (xmlHttpReg != null) {                
+                                   xmlHttpReg.open("post", "updatepost?schedule_id="+schedule_id +"&post_content="+post_content, true);                
+                                 xmlHttpReg.send();         
+                                 xmlHttpReg.onreadystatechange = doResult; 
+                                                }      
+       } 
+
+
+function doResult() {                
+ if (xmlHttpReg.readyState == 4 && xmlHttpReg.status == 200) {  
+   //alert('更改成功');
+   document.getElementById("post_a_"+currentseq).classList.remove("hidepart");
+   document.getElementById("btn_edit_"+currentseq).classList.remove("hidepart");
+   document.getElementById("post_div_"+currentseq).classList.add("hidepart");
+   document.getElementById("post_p_"+currentseq).classList.add("hidepart");
+   document.getElementById("post_a_"+currentseq).setAttribute('href',xmlHttpReg.responseText);
+   document.getElementById("post_a_"+currentseq).innerText=xmlHttpReg.responseText;
+  document.getElementById("post_content_"+currentseq).classList.remove("hidepart");
+ }
+}
+
+
+function updateOrder(order_id,status){
+     orderstatus=status;  
+     if (window.ActiveXObject) {
+                         xmlHttpReg = new ActiveXObject("Microsoft.XMLHTTP");            
+                          } 
+                          else if (window.XMLHttpRequest) {               
+                           xmlHttpReg = new XMLHttpRequest(); 
+                                     }           
+
+                               if (xmlHttpReg != null) {                
+                                   xmlHttpReg.open("post", "updateorderstatus?order_id="+order_id +"&status="+status, true);                
+                                 xmlHttpReg.send();         
+                                 xmlHttpReg.onreadystatechange = doResult4OrderStatus; 
+                                                }      
+       } 
+
+
+function doResult4OrderStatus() {                
+ if (xmlHttpReg.readyState == 4 && xmlHttpReg.status == 200) {  
+   alert('更改成功');
+   if(orderstatus==1){
+   document.getElementById("accept").classList.remove("hidepart");
+   document.getElementById("ifdecide").classList.add("hidepart");
+   document.getElementById("operation").classList.add("hidepart");
+   }else{
+   document.getElementById("refuse").classList.remove("hidepart");
+   document.getElementById("ifdecide").classList.add("hidepart");
+   document.getElementById("operation").classList.add("hidepart");
+   }
+ }
+}
+
+Date.prototype.format = function(format)
+{
+ var o = {
+ "M+" : this.getMonth()+1, //month
+ "d+" : this.getDate(),    //day
+ "h+" : this.getHours(),   //hour
+ "m+" : this.getMinutes(), //minute
+ "s+" : this.getSeconds(), //second
+ "q+" : Math.floor((this.getMonth()+3)/3),  //quarter
+ "S" : this.getMilliseconds() //millisecond
+ }
+ if(/(y+)/.test(format)) format=format.replace(RegExp.$1,
+ (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+ for(var k in o)if(new RegExp("("+ k +")").test(format))
+ format = format.replace(RegExp.$1,
+ RegExp.$1.length==1 ? o[k] :
+ ("00"+ o[k]).substr((""+ o[k]).length));
+ return format;
+}
+  function addBusinessDays(d,n,i) {
+    var d = new Date();
+    d = new Date(d.getTime());
+    var day = d.getDay();
+   
+    d.setDate(d.getDate() + n + (day === 6 ? 2 : +!day) + (Math.floor((n - 1 + (day % 6 || 1)) / 5) * 2));
+  
+     $("#td_"+i).text(d.format('yyyy-MM-dd hh')+"点之前");
+     $("#submitday_"+i).val(d.format('yyyy-MM-dd hh'));
+    return d;
+  }
+
+  function isInteger(obj) {
+    reg = /^[-+]?\d+$/;
+    if (!reg.test(obj) || obj < 0) {
+        return false;
+    } else {
+        return true;
+    }
+}
+  function caculateDay(i){
+    var curDays=$("#input_"+i).val();
+      if(isInteger(curDays)){
+                 //addBusinessDays(d,parseInt(curDays),i)
+           }else{
+                alert("输入大于0的整数")
+                return;
+           }
+    var totaldays=0;
+    var d = new Date();
+    for (var j =1; j < 6; j++) {  
+        curDays=$("#input_"+j).val();
+       if(curDays==""){
+          curDays=0;
+         }
+        totaldays=totaldays + parseInt(curDays);
+        curDays=$("#input_"+j).val();
+        addBusinessDays(d,parseInt(totaldays),j)
+ 
+      }
+      
+  }
+  //var d = new Date();
+  //alert(addBusinessDays(d,5,1));
+  function updateSchedule(){
+
+  var curDays=$("#input_1").val();
+  if(curDays==''){
+    alert("请输入要点提炼的工作日数");
+    return;
+  }
+
+   var curDays=$("#input_2").val();
+  if(curDays==''){
+    alert("请输入创意大纲的工作日数");
+    return;
+  }
+   var curDays=$("#input_3").val();
+  if(curDays==''){
+    alert("请输入具体脚本的工作日数");
+    return;
+  }
+   var curDays=$("#input_4").val();
+  if(curDays==''){
+    alert("请输入绘图视频的工作日数");
+    return;
+  }
+   var curDays=$("#input_5").val();
+  if(curDays==''){
+    alert("请输入排版成稿的工作日数");
+    return;
+  }
+   alert("排期提交成功");
+   $("#frmschedule").submit();
+  }
+</script>
+
+<input type="hidden" name="user_id" id="user_id" value="<%=@user.id%>"/>
+<input type="hidden" name="creatorstatus" id="creatorstatus" value="0"/>
+<input type="hidden" name="marketerstatus" id="marketerstatus" value="1"/>
+<input type="hidden" name="adminstatus" id="adminstatus" value="1"/>
+<div class="row border-bottom">
+        <div class="ibox-title">
+          <p>订单号：<strong><%=@orders[0].id%></strong></p>
+        </div>
+      </div>
+
+      <div class="fh-breadcrumb">
+        <div class="fh-column">
+          <div class="full-height-scroll">
+            <ul class="list-group elements-list">
+                <li class="list-group-item active">
+                  <a data-toggle="tab" href="#tab-1">
+                    <span class="pull-right badge badge-danger"></span>
+                    <strong>需求详情</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span>
+                        
+                    </div>
+                  </a>
+                </li>
+                <li onclick="updatemessage(1)" class="list-group-item">
+                  <a data-toggle="tab" href="#tab-2">
+                      <%if @mestotal_1==0%>
+                   <span class="pull-right badge badge-danger" id="msg_1"></span>
+                    <%else%>
+                    <span class="pull-right badge badge-danger" id="msg_1"><%=@mestotal_1%>
+                    </span> 
+                    <%end%>
+                    <strong>要点提炼</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span>
+                      <i class="fa fa-clock-o"></i> <%if@steporder_1[0].messagetime !=nil%><%=@steporder_1[0].messagetime.strftime("%Y-%m-%d %H:%M")%><%end%>  
+                    </div>
+                  </a>
+                </li>
+                <li onclick="updatemessage(2)" class="list-group-item">
+                  <a data-toggle="tab" href="#tab-3">
+                     <%if @mestotal_2==0%>
+                   <span class="pull-right badge badge-danger" id="msg_2"></span>
+                    <%else%>
+                    <span class="pull-right badge badge-danger" id="msg_2"><%=@mestotal_2%></span>
+                      
+                    <%end%>
+                    <strong>创意大纲</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span></span>
+                      <i class="fa fa-clock-o"></i><%if @steporder_2[0].messagetime!=nil%><%=@steporder_2[0].messagetime.strftime("%Y-%m-%d %H:%M")%><%end%>  
+                    </div>
+                  </a>
+                </li>
+                <li onclick="updatemessage(3)" class="list-group-item">
+                  <a data-toggle="tab" href="#tab-4">
+                    <%if @mestotal_3==0%>
+                   <span class="pull-right badge badge-danger" id="msg_3"></span>
+                    <%else%>
+                    <span class="pull-right badge badge-danger" id="msg_3"><%=@mestotal_3%></span>
+                      
+                    <%end%>
+                    <strong>具体脚本</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span></span>
+                      <i class="fa fa-clock-o"></i><%if @steporder_3[0].messagetime!=nil%><%=@steporder_3[0].messagetime.strftime("%Y-%m-%d %H:%M")%><%end%>  
+                    </div>
+                  </a>
+                </li>
+                <li onclick="updatemessage(4)" class="list-group-item">
+                  <a data-toggle="tab" href="#tab-5">
+                       <%if @mestotal_4==0%>
+                   <span class="pull-right badge badge-danger" id="msg_4"></span>
+                    <%else%>
+                    <span class="pull-right badge badge-danger" id="msg_4"><%= @mestotal_4%></span>
+                      
+                    <%end%>
+                    <strong>绘图视频</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span></span>
+                      <i class="fa fa-clock-o"></i><%if @steporder_4[0].messagetime!=nil%><%=@steporder_4[0].messagetime.strftime("%Y-%m-%d %H:%M")%><%end%>  
+                    </div>
+                  </a>
+                </li>
+                <li onclick="updatemessage(5)" class="list-group-item">
+                  <a data-toggle="tab" href="#tab-6">
+                   <%if @mestotal_5==0%>
+                   <span class="pull-right badge badge-danger" id="msg_5"></span>
+                    <%else%>
+                    <span class="pull-right badge badge-danger" id="msg_5"><%= @mestotal_5%></span>
+                      
+                    <%end%>
+                    <strong>排版成稿</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span></span>
+                      <i class="fa fa-clock-o"></i> <%if @steporder_5[0].messagetime!=nil%><%=@steporder_5[0].messagetime.strftime("%Y-%m-%d %H:%M")%><%end%>  
+                    </div>
+                  </a>
+                </li>
+                <li class="list-group-item">
+                  <a data-toggle="tab" href="#tab-7">
+                    <span class="pull-right badge badge-danger"></span>
+                    <strong>合作评价</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span>
+                         
+                    </div>
+                  </a>
+                </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="full-height">
+          <div class="full-height-scroll white-bg border-left">
+              <div class="element-detail-box">
+                  <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                      <h3>需求详情</h3>
+                      <table class="table">
+                        <thead>
+                        <tr>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                         <tr>
+                          <td><div><strong class="small">项目名称 / 关键信息</strong></div>
+                          <small><%=@orders[0].name%> / <%=@orders[0].description%> </small></td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div><strong class="small">投放日期 / 预算</strong></div>
+                            <small><%=@orders[0].start%>  / <%=@orders[0].budget%> 万 </small>
+                            <div><strong class="small">联系方式</strong></div>
+                            <small><%=@orders[0].address%> <br> <%=@orders[0].truename%>/<%=@orders[0].mobile%></small>
+                          </td>
+                        </tr>
+                        <%if @orders[0].attachment !=nil%>
+                         <tr>
+                          <td>
+                            <input type="hidden" name="attachmentname" value="<%=@orders[0].attachment%>"/>
+                            <small><i class="fa fa-paperclip"></i> 附件 - <a href="javascript:download();"><%=@orders[0].attachment%></a></small>
+                          </td>
+                        </tr>
+                        <%end%>
+                         <%if @orders[0].status=="0"%>
+                        <tr id="ifdecide">
+                          <td>
+                            <small><strong>是否接受邀约？</strong></small>
+                          </td>
+                        </tr>
+                        <tr id="operation">
+                          <td>
+                            <button class="btn btn-primary btn-sm" type="button" onclick="updateOrder(<%=@orders[0].id%>,1)">接受</button>
+                            <button class="btn btn-default btn-sm" type="button" onclick="updateOrder(<%=@orders[0].id%>,-1)">拒绝</button>
+                          </td>
+                        </tr>
+                        <tr id="refuse" class="hidepart">
+                          <td>
+                            <small><strong class="text-navy">已拒绝</strong>邀约</small>
+                          </td>
+                         </tr>
+                         <tr id="accept" class="hidepart">
+                          <td>
+                             <small><strong class="text-navy">已接收</strong>邀约</small>
+                          </td>
+                         </tr>
+                     <%elsif @orders[0].status=="-1"%>
+                           <tr>
+                          <td>
+                            <small><strong class="text-navy">已拒绝</strong>邀约</small>
+                          </td>
+                         </tr>
+                         <%else%>
+                          <tr>
+                          <td>
+                             <small><strong class="text-navy">已接收</strong>邀约</small>
+                          </td>
+                         </tr>
+                           <%end%>
+                        </tbody>
+                      </table>
+                     <form id="frmschedule" method='post' action="/updateSchedule">
+                      <input type="hidden" name="order_id" id="order_id" value="<%=@orders[0].id%>"/>
+                     <input type="hidden" value="457a1e93c3a23ec2c67f1dc468bde6a4a5539610" name="authenticity_token"/>  
+                      <table class="table small">
+                        <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>项目阶段</th>
+                          <th>工作日数</th>
+                          <th>交付日期</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                        <% @schedules.each_with_index do |schedule,i| %>  
+                       <%if i==0%>
+                       <input type="hidden" value="<%=schedule.id%>" name="scheduleId_<%=(i+1)%>" id="scheduleId_<%=(i+1)%>"/>
+                        <input type="hidden" value="<%=schedule.ends_on%>" name="submitday_<%=(i+1)%>" id="submitday_<%=(i+1)%>"/>
+                        <tr>
+                          <td>1</td>
+                          <td>要点提炼</td>
+                        
+                          <td><input onblur="caculateDay(1)" id="input_1" name="input_1" attrscheduleId="<%=schedule.id%>" type="text" size="2" value="<%=schedule.workdays%>"></td>
+                          <td id="td_1"><%if schedule.ends_on==nil%>
+                           <%else%>
+                             <%=schedule.ends_on.strftime('%Y-%m-%d %H')%>点之前
+                           <%end%>
+                          </td>
+                        </tr>
+                        <%elsif i==1
+                          %>
+                          <input type="hidden" value="<%=schedule.id%>" name="scheduleId_<%=(i+1)%>" id="scheduleId_<%=(i+1)%>"/>
+                        <input type="hidden" value="<%=schedule.ends_on%>" name="submitday_<%=(i+1)%>" id="submitday_<%=(i+1)%>"/>
+                           <tr>
+                          <td>2</td>
+                          <td >创意大纲</td>
+                           <td><input onblur="caculateDay(2)"  id="input_2" name="input_2" attrscheduleId="<%=schedule.id%>" type="text" size="2" value="<%=schedule.workdays%>"></td>
+                            <td id="td_2"><%if schedule.ends_on==nil%>
+                           <%else%>
+                            <%=schedule.ends_on.strftime('%Y-%m-%d %H')%>点之前
+                           <%end%></td>
+                        </tr>
+                          <%elsif i==2
+                          %>
+                          <input type="hidden" value="<%=schedule.id%>" name="scheduleId_<%=(i+1)%>" id="scheduleId_<%=(i+1)%>"/>
+                          <input type="hidden" value="<%=schedule.ends_on%>" name="submitday_<%=(i+1)%>" id="submitday_<%=(i+1)%>"/>
+                          <tr>
+                          <td>3</td>
+                          <td >具体脚本</td>
+                          <td><input onblur="caculateDay(3)"  id="input_3" name="input_3"  attrscheduleId="<%=schedule.id%>" type="text" size="2" value="<%=schedule.workdays%>"></td>
+                          <td id="td_3"><%if schedule.ends_on==nil%>
+                           <%else%>
+                             <%=schedule.ends_on.strftime('%Y-%m-%d %H')%>点之前
+                           <%end%></td>
+                        </tr>
+                           <%elsif i==3
+                          %>
+                          <input type="hidden" value="<%=schedule.id%>" name="scheduleId_<%=(i+1)%>" id="scheduleId_<%=(i+1)%>"/>
+                          <input type="hidden" value="<%=schedule.ends_on%>" name="submitday_<%=(i+1)%>" id="submitday_<%=(i+1)%>"/>
+                           <tr>
+                          <td>4</td>
+                          <td>绘图/视频</td>
+                           <td><input onblur="caculateDay(4)" id="input_4" name="input_4"  attrscheduleId="<%=schedule.id%>" type="text" size="2" value="<%=schedule.workdays%>"></td>
+                            <td id="td_4"><%if schedule.ends_on==nil%>
+                           <%else%>
+                             <%=schedule.ends_on.strftime('%Y-%m-%d %H')%>点之前
+                           <%end%></td>
+                        </tr>
+                           <%elsif i==4
+                          %>
+                          <input type="hidden" value="<%=schedule.id%>" name="scheduleId_<%=(i+1)%>" id="scheduleId_<%=(i+1)%>"/>
+                        <input type="hidden" value="<%=schedule.ends_on%>" name="submitday_<%=(i+1)%>" id="submitday_<%=(i+1)%>"/>
+                           <tr>
+                          <td>5</td>
+                          <td>排版成稿</td>
+                           <td><input onblur="caculateDay(5)" id="input_5" name="input_5"  attrscheduleId="<%=schedule.id%>" type="text" size="2" value="<%=schedule.workdays%>"></td>
+                           <td id="td_5"><%if schedule.ends_on==nil%>
+                           <%else%>
+                             <%=schedule.ends_on.strftime('%Y-%m-%d %H')%>点之前
+                           <%end%></td>
+                        </tr>
+                       <%end%>
+
+                       <% end%>
+                        </tbody>
+                      </table>
+                      </form>
+                      <button class="btn btn-primary btn-sm" type="button" onclick="updateSchedule()">提交排期</button>                 
+                    </div>
+                   <input type="hidden" value="<%=@schedules[0].post_id%>"/>
+                    <div id="tab-2" class="tab-pane">
+                   <%if @schedules[0].post_id !=nil%>
+                  <div id="btn_edit_1" class="pull-right">
+                    <a href="javascript:void()" onclick="editPost(1)">编辑</a>
+                  </div>
+                  <%else%>
+                  <div  id="btn_edit_1" class="pull-right hidepart">
+                    <a href="javascript:void()" onclick="editPost(1)">编辑</a>
+                  </div>
+                  <%end%>
+                      <h3>要点提炼</h3>
+                    <p class="small">提交在线文档链接，推荐使用石墨文档</p>
+                     <%if @schedules[0].post_id !=nil%>
+                  <p id="post_content_1">
+                    <a id="post_a_1" href="<%=@schedules[0].post_content%>" target="blank">
+                      <%=@schedules[0].post_content%>
+                    </a>
+                  </p>
+
+                   <p id="post_p_1" class="hidepart">
+                    <input type="hidden" name="post_schedule_1" id="post_schedule_1" value="<%=@schedules[0].id%>"/>
+                    <input type="text" id="post_input_1" class="form-control form-control-sm" placeholder="https://" value="<%=@schedules[0].post_content%>">
+                  </p>
+                  <div id="post_div_1" class="form-group hidepart">
+                    <button class="btn btn-sm btn-primary" onclick="updatepost(1)" id="post_btn_2" type="button">提交
+                    </button>
+                  </div>
+                    <%else%>
+                     <p id="post_content_1 hidepart">
+                    <a id="post_a_1" href="<%=@schedules[0].post_content%>" target="blank">
+                      <%=@schedules[0].post_content%>
+                    </a>
+                   </p>  
+                    <p id="post_p_1" >
+                    <input type="hidden" name="post_schedule_1" id="post_schedule_1" value="<%=@schedules[0].id%>"/>
+                    <input type="text" id="post_input_1" class="form-control form-control-sm" placeholder="https://">
+                  </p>
+
+                  <div id="post_div_1" class="form-group ">
+                    <button class="btn btn-sm btn-primary" onclick="updatepost(1)" id="post_btn_2" type="button">提交
+                    </button>
+                  </div>
+
+                   <%end%>
+
+                  <div class="hr-line-dashed"></div>
+
+
+                  <div class="feed-activity-list">
+                    <!-- STEP 1 -->
+                    <!-- Messages List BEGIN -->
+                    <%   @messages = Message.where(order_id:@order_id,step_order:1) %>
+                    <div id="messages_list_1">
+                      <%= render @messages %>
+                    </div>
+
+                    <div class="input-group">
+                      <input type="text" data-behavior="room_speaker_1" class="form-control" id="step_order_1">
+                      <span class="input-group-btn">
+                      <button type="button" class="btn btn-primary">按回车发布</button>
+                      </span>
+                    </div>
+                    <!-- Messages List END -->
+                  </div>
+                </div>
+
+                <div id="tab-3" class="tab-pane">
+                  <%if @schedules[1].post_id !=nil%>
+                  <div id="btn_edit_2" class="pull-right">
+                    <a href="javascript:void()" onclick="editPost(2)">编辑</a>
+                  </div>
+                  <%else%>
+                  <div  id="btn_edit_2" class="pull-right hidepart">
+                    <a href="javascript:void()" onclick="editPost(2)">编辑</a>
+                  </div>
+                  <%end%>
+                  <h3>创意大纲</h3>
+                  <p class="small">提交在线文档链接，推荐使用石墨文档</p>
+                   <%if @schedules[1].post_id !=nil%>
+                  <p id="post_content_2">
+                    <a id="post_a_2" href="<%=@schedules[1].post_content%>" target="blank">
+                      <%=@schedules[1].post_content%>
+                    </a>
+                  </p>
+
+                   <p id="post_p_2" class="hidepart">
+                    <input type="hidden" name="post_schedule_2" id="post_schedule_2" value="<%=@schedules[1].id%>"/>
+                    <input type="text" id="post_input_2" class="form-control form-control-sm" placeholder="https://" value="<%=@schedules[1].post_content%>">
+                  </p>
+                  <div id="post_div_2" class="form-group hidepart">
+                    <button class="btn btn-sm btn-primary" onclick="updatepost(2)" id="post_btn_2" type="button">提交
+                    </button>
+                  </div>
+                    <%else%>
+                     <p id="post_content_2 hidepart">
+                    <a id="post_a_2" href="<%=@schedules[1].post_content%>" target="blank">
+                      <%=@schedules[1].post_content%>
+                    </a>
+                   </p>  
+                    <p id="post_p_2" >
+                    <input type="hidden" name="post_schedule_2" id="post_schedule_2" value="<%=@schedules[1].id%>"/>
+                    <input type="text" id="post_input_2" class="form-control form-control-sm" placeholder="https://">
+                  </p>
+
+                  <div id="post_div_2" class="form-group ">
+                    <button class="btn btn-sm btn-primary" onclick="updatepost(2)" id="post_btn_2" type="button">提交
+                    </button>
+                  </div>
+
+                   <%end%>
+                  <div class="hr-line-dashed"></div>
+                  <div class="feed-activity-list">
+                    <!-- STEP 2 -->
+                    <!-- Messages List BEGIN -->
+                    <% @messages = Message.where(order_id:@order_id,step_order:2) %>
+                    <div id="messages_list_2">
+                      <%= render @messages %>
+                    </div>
+
+                    <div class="input-group">
+                      <input type="text" data-behavior="room_speaker_2" class="form-control" id="step_order_2">
+                      <span class="input-group-btn">
+                      <button type="button" class="btn btn-primary">按回车发布</button>
+                      </span>
+                    </div>
+                    <!-- Messages List END -->
+                  </div>
+                </div>
+
+                <div id="tab-4" class="tab-pane">
+                      <%if @schedules[2].post_id !=nil%>
+                  <div id="btn_edit_3" class="pull-right">
+                    <a href="javascript:void()" onclick="editPost(3)">编辑</a>
+                  </div>
+                  <%else%>
+                  <div  id="btn_edit_3" class="pull-right hidepart">
+                    <a href="javascript:void()" onclick="editPost(3)">编辑</a>
+                  </div>
+                  <%end%>
+
+                  <h3>具体脚本</h3>
+                  <p class="small">提交在线文档链接，推荐使用石墨文档</p>
+                   <%if @schedules[2].post_id !=nil%>
+                  <p id="post_content_3">
+                    <a id="post_a_3" href="<%=@schedules[2].post_content%>" target="blank">
+                      <%=@schedules[2].post_content%>
+                    </a>
+                  </p>
+
+                   <p id="post_p_3" class="hidepart">
+                    <input type="hidden" name="post_schedule_3" id="post_schedule_3" value="<%=@schedules[2].id%>"/>
+                    <input type="text" id="post_input_3" class="form-control form-control-sm" placeholder="https://" value="<%=@schedules[2].post_content%>">
+                  </p>
+                  <div id="post_div_3" class="form-group hidepart">
+                    <button class="btn btn-sm btn-primary" onclick="updatepost(3)" id="post_btn_3" type="button">提交
+                    </button>
+                  </div>
+                    <%else%>
+                     <p id="post_content_3" class="hidepart">
+                    <a id="post_a_3" href="<%=@schedules[2].post_content%>" target="blank">
+                      <%=@schedules[2].post_content%>
+                    </a>
+                   </p>  
+                    <p id="post_p_3" >
+                    <input type="hidden" name="post_schedule_3" id="post_schedule_3" value="<%=@schedules[2].id%>"/>
+                    <input type="text" id="post_input_3" class="form-control form-control-sm" placeholder="https://">
+                  </p>
+
+                  <div id="post_div_3" class="form-group ">
+                    <button class="btn btn-sm btn-primary" onclick="updatepost(3)" id="post_btn_3" type="button">提交
+                    </button>
+                  </div>
+
+                   <%end%>
+                  <div class="hr-line-dashed"></div>
+                  <div class="feed-activity-list">
+                    <!-- STEP 3 -->
+                    <!-- Messages List BEGIN -->
+                    <% @messages = Message.where(order_id:@order_id,step_order:3) %>
+                    <div id="messages_list_3">
+                      <%= render @messages %>
+                    </div>
+
+                    <div class="input-group">
+                      <input type="hidden" name="schedule_3" value="<%@schedules[0].id%>"/>
+                    
+                      <input type="text" data-behavior="room_speaker_3" class="form-control" id="step_order_3">
+                      <span class="input-group-btn">
+                      <button type="button" class="btn btn-primary">按回车发布</button>
+                      </span>
+                    </div>
+                    <!-- Messages List END -->
+                  </div>
+                </div>
+
+                <div id="tab-5" class="tab-pane">
+                   <%if @schedules[3].post_id !=nil%>
+                  <div id="btn_edit_4" class="pull-right">
+                    <a href="javascript:void()" onclick="editPost(4)">编辑</a>
+                  </div>
+                  <%else%>
+                  <div  id="btn_edit_4" class="pull-right hidepart">
+                    <a href="javascript:void()" onclick="editPost(4)">编辑</a>
+                  </div>
+                  <%end%>
+
+                  <h3>绘图/视频</h3>
+                  <p class="small">提交在线文档链接，推荐使用石墨文档</p>
+                  <%if @schedules[3].post_id !=nil%>
+                  <p id="post_content_4">
+                    <a id="post_a_4" href="<%=@schedules[3].post_content%>" target="blank">
+                      <%=@schedules[3].post_content%>
+                    </a>
+                  </p>
+
+                   <p id="post_p_4" class="hidepart">
+                    <input type="hidden" name="post_schedule_4" id="post_schedule_4" value="<%=@schedules[3].id%>"/>
+                    <input type="text" id="post_input_4" class="form-control form-control-sm" placeholder="https://" value="<%=@schedules[3].post_content%>">
+                  </p>
+                  <div id="post_div_4" class="form-group hidepart">
+                    <button class="btn btn-sm btn-primary" onclick="updatepost(4)" id="post_btn_4" type="button">提交
+                    </button>
+                  </div>
+                    <%else%>
+                     <p id="post_content_4" class="hidepart">
+                     <a id="post_a_4" href="<%=@schedules[3].post_content%>" target="blank">
+                      <%=@schedules[3].post_content%>
+                    </a>
+                   </p>  
+                    <p id="post_p_4" >
+                    <input type="hidden" name="post_schedule_4" id="post_schedule_4" value="<%=@schedules[3].id%>"/>
+                    <input type="text" id="post_input_4" class="form-control form-control-sm" placeholder="https://">
+                  </p>
+
+                  <div id="post_div_4" class="form-group ">
+                    <button class="btn btn-sm btn-primary" onclick="updatepost(4)" id="post_btn_4" type="button">提交
+                    </button>
+                  </div>
+
+                   <%end%>
+                  <div class="hr-line-dashed"></div>
+                  <div class="feed-activity-list">
+                    <!-- STEP 4 -->
+                    <!-- Messages List BEGIN -->
+                    <% @messages = Message.where(order_id:@order_id,step_order:4) %>
+                    <div id="messages_list_4">
+                      <%= render @messages %>
+                    </div>
+
+                    <div class="input-group">
+                      <input type="text" data-behavior="room_speaker_4" class="form-control" id="step_order_4">
+                      <span class="input-group-btn">
+                      <button type="button" class="btn btn-primary">按回车发布</button>
+                      </span>
+                    </div>
+                    <!-- Messages List END -->
+                  </div>
+                </div>
+
+                <div id="tab-6" class="tab-pane">
+                   <%if @schedules[4].post_id !=nil%>
+                  <div id="btn_edit_5" class="pull-right">
+                    <a href="javascript:void()" onclick="editPost(5)">编辑</a>
+                  </div>
+                  <%else%>
+                  <div  id="btn_edit_5" class="pull-right hidepart">
+                    <a href="javascript:void()" onclick="editPost(5)">编辑</a>
+                  </div>
+                  <%end%>
+
+                  <h3>排版成稿</h3>
+                  <p class="small">提交在线文档链接，推荐使用石墨文档</p>
+                  <%if @schedules[4].post_id !=nil%>
+                  <p id="post_content_5">
+                    <a id="post_a_5" href="<%=@schedules[4].post_content%>" target="blank">
+                      <%=@schedules[4].post_content%>
+                    </a>
+                  </p>
+
+                   <p id="post_p_5" class="hidepart">
+                    <input type="hidden" name="post_schedule_5" id="post_schedule_5" value="<%=@schedules[4].id%>"/>
+                    <input type="text" id="post_input_5" class="form-control form-control-sm" placeholder="https://" value="<%=@schedules[4].post_content%>">
+                  </p>
+                  <div id="post_div_5" class="form-group hidepart">
+                    <button class="btn btn-sm btn-primary" onclick="updatepost(5)" id="post_btn_5 type="button">提交
+                    </button>
+                  </div>
+                    <%else%>
+                     <p p id="post_content_5" class="hidepart">
+                    <a id="post_a_5" href="<%=@schedules[4].post_content%>" target="blank">
+                      <%=@schedules[4].post_content%>
+                    </a>
+                   </p>  
+                    <p id="post_p_5" >
+                    <input type="hidden" name="post_schedule_2" id="post_schedule_5" value="<%=@schedules[4].id%>"/>
+                    <input type="text" id="post_input_5" class="form-control form-control-sm" placeholder="https://">
+                  </p>
+
+                  <div id="post_div_5" class="form-group ">
+                    <button class="btn btn-sm btn-primary" onclick="updatepost(5)" id="post_btn_5" type="button">提交
+                    </button>
+                  </div>
+
+                   <%end%>
+                  <div class="hr-line-dashed"></div>
+                  <div class="feed-activity-list">
+                    <!-- STEP 5 -->
+                    <!-- Messages List BEGIN -->
+                    <% @messages = Message.where(order_id:@order_id,step_order:5) %>
+                    <div id="messages_list_5">
+                      <%= render @messages %>
+                    </div>
+
+                    <div class="input-group">
+                      <input type="text" data-behavior="room_speaker_5" class="form-control" id="step_order_5">
+                      <span class="input-group-btn">
+                      <button type="button" class="btn btn-primary">按回车发布</button>
+                      </span>
+                    </div>
+                    <!-- Messages List END -->
+                  </div>
+                </div>
+                    <div id="tab-7" class="tab-pane">
+                      <div class="form-group">
+                        <h3>合作评价</h3>
+                        <textarea class="form-control" id="comments" name="comments" rows="3"></textarea>
+                      </div>
+                      <button class="btn btn-sm btn-primary" onclick="submitcomments()">提交</button>
+                    </div>
+
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>

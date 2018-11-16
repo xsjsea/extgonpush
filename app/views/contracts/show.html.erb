@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Creator:</strong>
+  <%= @contract.creator_id %>
+</p>
+
+<p>
+  <strong>Marketer:</strong>
+  <%= @contract.marketer_id %>
+</p>
+
+<p>
+  <strong>Campaigns:</strong>
+  <%= @contract.campaigns_id %>
+</p>
+
+<p>
+  <strong>Contract price:</strong>
+  <%= @contract.contract_price %>
+</p>
+
+<p>
+  <strong>Down payment date:</strong>
+  <%= @contract.down_payment_date %>
+</p>
+
+<p>
+  <strong>Down payment:</strong>
+  <%= @contract.down_payment %>
+</p>
+
+<p>
+  <strong>Rest payment date:</strong>
+  <%= @contract.rest_payment_date %>
+</p>
+
+<p>
+  <strong>Rest payment:</strong>
+  <%= @contract.rest_payment %>
+</p>
+
+<p>
+  <strong>Contract image:</strong>
+  <%= @contract.contract_image %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @contract.comment %>
+</p>
+
+<%= link_to 'Edit', edit_contract_path(@contract) %> |
+<%= link_to 'Back', contracts_path %>

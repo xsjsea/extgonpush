@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  campaign_id: 1
+  marketer_id: 1
+  budget: 1.5
+  start_date: 2018-09-23 05:58:53
+  description: MyString
+
+two:
+  campaign_id: 1
+  marketer_id: 1
+  budget: 1.5
+  start_date: 2018-09-23 05:58:53
+  description: MyString

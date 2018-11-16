@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Social Channels</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @social_channels.each do |social_channel| %>
+      <tr>
+        <td><%= social_channel.name %></td>
+        <td><%= link_to 'Show', social_channel %></td>
+        <td><%= link_to 'Edit', edit_social_channel_path(social_channel) %></td>
+        <td><%= link_to 'Destroy', social_channel, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Social Channel', new_social_channel_path %>

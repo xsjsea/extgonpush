@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Bizcase author:</strong>
+  <%= @bizcase.bizcase_author %>
+</p>
+
+<p>
+  <strong>Bizcase date:</strong>
+  <%= @bizcase.bizcase_date %>
+</p>
+
+<p>
+  <strong>Bizcase title:</strong>
+  <%= @bizcase.bizcase_title %>
+</p>
+
+<p>
+  <strong>Bizcase content:</strong>
+  <%= @bizcase.bizcase_content %>
+</p>
+
+<p>
+  <strong>Bizcase status:</strong>
+  <%= @bizcase.bizcase_status %>
+</p>
+
+<p>
+  <strong>Bizcase modified:</strong>
+  <%= @bizcase.bizcase_modified %>
+</p>
+
+<p>
+  <strong>Bizcase type:</strong>
+  <%= @bizcase.bizcase_type %>
+</p>
+
+<p>
+  <strong>Bizcase link:</strong>
+  <%= @bizcase.bizcase_link %>
+</p>
+
+<p>
+  <strong>String:</strong>
+  <%= @bizcase.string %>
+</p>
+
+<%= link_to 'Edit', edit_bizcase_path(@bizcase) %> |
+<%= link_to 'Back', bizcases_path %>

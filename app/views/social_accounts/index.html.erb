@@ -1,0 +1,58 @@
+<div id="page-wrapper" class="gray-bg">
+      <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="ibox-title">
+          <h5>账号列表</h5>
+        </div>
+
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-sm-3">
+              <a class="btn btn-sm btn-primary m-t-n-xs" href="/social_accounts/new" role="button">
+                <strong>新增</strong>
+              </a>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>渠道</th>
+                <th>昵称</th>
+                <th>粉丝数</th>
+                <th>阅读数</th>
+                <th>点赞数</th>
+                <th>评论数</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+              <tbody>
+
+      <% @social_accounts.each_with_index do |social_account,i| %>
+              <tr>
+                <td><%=(i+1)%></td>
+                <td><%=social_account.channel_name%></td>
+                <td><a href="javascript:void(0)"><%=social_account.nickname%></a></td>
+                <td><%=social_account.fans%></td>
+                <td><%=social_account.readers%></td>
+                <td><%=social_account.praises%></td>
+                <td><%=social_account.comments%></td>
+                <td>
+                   <%= link_to '编辑', edit_social_account_path(social_account)%>
+                  <a href="/social_accounts/destroy/<%=social_account.id%>">删除</a>
+                </td>
+              </tr>
+              <%end%>  
+              </tbody>
+            </table>
+             <%=will_paginate @social_accounts,:class=>"pagination",:previous_label=>"上一页",:next_label=>"下一页"%>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="pull-right">
+          <strong>GonPush.com</strong> &copy; 2018
+        </div>
+      </div>
+    </div>

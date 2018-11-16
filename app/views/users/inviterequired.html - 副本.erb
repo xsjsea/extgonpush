@@ -1,0 +1,71 @@
+<script type="text/javascript">
+  function smt(){
+  alert("接单设置成功");
+$("#frminviterequired").submit();
+  }
+</script>
+<div id="page-wrapper" class="gray-bg">
+      <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="ibox-title">
+          <h5>基础信息</h5>
+        </div>
+
+        <div class="ibox-content">
+            <form method="post" id="frminviterequired" action="/saveinviterequired" class="form-horizontal">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">是否接销量推广 <br/></label>
+                  <div class="col-sm-10">
+                     <%if @inviterequired.inviterequired ==nil || @inviterequired.inviterequired=="1"%>
+                    <div>
+                      <label><input type="radio" value="1" checked name="inviterequired"> 是</label></div>
+                    <div><label><input type="radio" value="0" name="inviterequired"> 否</label>
+                    </div>
+                    <%else%>
+                     <div>
+                      <label><input type="radio" value="1"  name="inviterequired"> 是</label></div>
+                    <div><label><input type="radio" value="0" checked name="inviterequired"> 否</label>
+                    </div>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">是否接敏感产品 <br/>
+                    <small class="text-navy">包括游戏、保健药品、医疗美容、化妆品、理财等</small>
+                  </label>
+                  <div class="col-sm-10">
+                     <%if @inviterequired.productselected ==nil || @inviterequired.productselected=="1"%>
+                    <div><label><input type="radio" value="1" checked name="productselected"> 是</label></div>
+                    <div><label><input type="radio" value="0" name="productselected"> 否</label></div>
+                    <div><label><input type="radio" value="2" name="productselected"> 知名品牌可以考虑</label></div>
+                  </div>
+                    <%elsif @inviterequired.productselected=="0"%>
+                    <div><label><input type="radio" value="1"  name="productselected"> 是</label></div>
+                    <div><label><input type="radio" value="0" checked name="productselected"> 否</label>
+                    </div>
+                    <div><label><input type="radio" value="2" name="productselected"> 知名品牌可以考虑</label></div>
+                  <%else%>
+ <div><label><input type="radio" value="1"  name="productselected"> 是</label></div>
+                    <div><label><input type="radio" value="0"  name="productselected"> 否</label></div>
+                    <div><label><input type="radio" value="2" checked name="productselected"> 知名品牌可以考虑</label></div>
+                    <%end%>
+
+
+                  </div>
+           
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button class="btn btn-primary"  onclick="smt()" type="button">保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="pull-right">
+          <strong>GonPush.com</strong> &copy; 2018
+        </div>
+      </div>
+    </div>
+

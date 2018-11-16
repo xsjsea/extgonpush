@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="原创 品牌 高效">
+  <title>原力推 - 原创号资源一站式合作平台</title>
+  <!-- Bootstrap core CSS -->
+  <link href="/assets/backcss/bootstrap.min.css" rel="stylesheet">
+  <!-- Animation CSS -->
+  <link href="/assets/backcss/animate.css" rel="stylesheet">
+  <link href="/assets/backcss/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="/assets/backcss/style.css" rel="stylesheet">
+  <!-- slick_carousel -->
+  <link href="/assets/backcss/plugins/slick/slick.css" rel="stylesheet">
+  <link href="/assets/backcss/plugins/slick/slick-theme.css" rel="stylesheet">
+  <!-- TagCloud -->
+  <link href="/assets/backcss/plugins/jqcloud/jqcloud.min.css" rel="stylesheet">
+</head>
+
+<body id="page-top" class="landing-page no-skin-config">
+  <input type="hidden" name="marketer_id" id="marketer_id" value="<%=@marketer_id%>"/>
+  <input type="hidden" name="campaign_id" id="campaign_id" value="<%=@campaign_id%>"/>
+  <input type="hidden" name="creator_id" id="creator_id" value="<%=@creator_id%>"/>
+ 
+<div class="navbar-wrapper">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header page-scroll">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          <img src="/assets/landing/po-logo.svg" alt="原力推" width="88.64" height="25.79">
+        </a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
+         <!--  <li><a class="page-scroll login" href="#login">登录</a></li>
+          <li><a class="page-scroll more" href="#register">注册</a></li> -->
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="col-lg-12">
+  <div class="navy-bg p-lg text-center">
+    <div class="m-b-md"></div>
+    <img src="/assets/profile/watchwhatwatch.png" class="img-circle circle-border" alt="profile">
+    <h2 class="font-bold">吓脑湿</h2>
+    <p>互联网媒体圈洞见宗师 / 朋友圈霸屏者 / 热搜钉子户 / 爆文制造机</p>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="row m-b-lg">
+      <div class="col-lg-12 text-center">
+        <div class="navy-line"></div>
+        <h1>粉丝数据</h1>
+      </div>
+    </div>
+
+    <div class="row features-block">
+      <div class="col-md-2 text-center wow fadeInLeft">
+        <i class="fa fa-weixin features-icon"></i>
+        <h2>60万</h2>
+        <p>粉丝关注</p>
+      </div>
+      <div class="col-md-2 text-center wow fadeInLeft">
+        <i class="fa fa-weibo features-icon"></i>
+        <h2>2万</h2>
+        <p>粉丝关注</p>
+      </div>
+      <div class="col-md-2 text-center wow fadeInLeft">
+        <i class="fa fa-building features-icon"></i>
+        <h2>90%</h2>
+        <p>一线城市用户占比</p>
+      </div>
+      <div class="col-md-2 text-center wow fadeInLeft">
+        <i class="fa fa-female features-icon"></i>
+        <h2>52%</h2>
+        <p>女性用户占比</p>
+      </div>
+      <div class="col-md-2 text-center wow fadeInLeft">
+        <i class="fa fa-mobile-phone features-icon"></i>
+        <h2>60%</h2>
+        <p>iPhone用户占比</p>
+      </div>
+      <div class="col-md-2 text-center wow fadeInLeft">
+        <i class="fa fa-child features-icon"></i>
+        <h2>85%</h2>
+        <p>80、90后用户占比</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style type="text/css">
+  #demo{
+    margin: 0 auto;
+    height: 250px;
+  }
+</style>
+
+<section id="pricing" class="pricing">
+  <div class="container">
+    <div class="row m-b-lg">
+      <div class="col-lg-12 text-center">
+        <div class="navy-line"></div>
+        <h1>标签印象</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <div id="demo"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row m-b-lg">
+      <div class="col-lg-12 text-center">
+        <div class="navy-line"></div>
+        <h1>合作案例</h1>
+      </div>
+    </div>
+    <div class="row features-block">
+      <div class="col-lg-6 features-text wow fadeInLeft">
+        <small>罗莱家纺</small>
+        <h2>世间的温柔</h2>
+        <p><span class="label label-danger">阅读量：43万</span></p>
+        <p>通过对当代爱情的讨论，描绘现代人内心依靠的渴求，引出客户罗莱家纺的超柔特点，好评如潮。</p>
+        <a target="_blank" href="https://mp.weixin.qq.com/s/VsrZ1APvIcykIBOEevgiPQ" class="btn btn-primary">查看详情</a>
+      </div>
+      <div class="col-lg-6 text-right wow fadeInRight">
+        <img src="/assets/case/luolai.png" alt="service" class="img-responsive pull-right">
+      </div>
+    </div>
+
+    <div class="row features-block">
+      <div class="col-lg-6 text-right wow fadeInRight">
+        <img src="/assets/case/jeep.png" alt="service" class="img-responsive pull-right">
+      </div>
+      <div class="col-lg-6 features-text wow fadeInLeft">
+        <small>JEEP</small>
+        <h2>大中产行为规范</h2>
+        <p><span class="label label-danger">阅读量：43万</span></p>
+        <p>通过动画生动展现了JEEP大指挥官车型，满足中产对于仪式感的所有想象，深受读者朋友一致好评。</p>
+        <a target="_blank" href="https://mp.weixin.qq.com/s/cZcrdj9BX-4uXph2FloBQQ" class="btn btn-primary">查看详情</a>
+      </div>
+    </div>
+
+    <div class="row features-block">
+      <div class="col-lg-6 features-text wow fadeInLeft">
+        <small>西门子油烟机</small>
+        <h2>都市人患上厌食症</h2>
+        <p><span class="label label-danger">阅读量：43万</span></p>
+        <p>通过动画生动展现了客户产品的量大特性，深受读者一致好评。</p>
+        <a target="_blank" href="https://mp.weixin.qq.com/s/jMTjd-YH0SawQ2HzB7vi1A" class="btn btn-primary">查看详情</a>
+      </div>
+      <div class="col-lg-6 text-right wow fadeInRight">
+        <img src="/assets/case/siemens.png" alt="service" class="img-responsive pull-right">
+      </div>
+    </div>
+
+    <div class="row features-block">
+      <div class="col-lg-6 text-right wow fadeInRight">
+        <img src="/assets/case/tmall.png" alt="service" class="img-responsive pull-right">
+      </div>
+      <div class="col-lg-6 features-text wow fadeInLeft">
+        <small>天猫</small>
+        <h2>当代青年升级进化论</h2>
+        <p><span class="label label-danger">阅读量：43万</span></p>
+        <p>通过动画生动展现了天猫国际对青年生活质量提升的帮助，深受读者朋友的一致好评。</p>
+        <a target="_blank" href="https://mp.weixin.qq.com/s/5wNLRwgJCXLlohWYY943gQ" class="btn btn-primary">查看详情</a>
+      </div>
+    </div>
+
+    <div class="row features-block">
+      <div class="col-lg-6 features-text wow fadeInLeft">
+        <small>京东金融</small>
+        <h2>鸡贼生活指南</h2>
+        <p><span class="label label-danger">阅读量：43万</span></p>
+        <p>通过漫画趣味横生地展现了“鸡贼”生活的小窍门，巧妙地引出了京东金融APP双十一前地优惠活动，广受读者好评。</p>
+        <a target="_blank" href="https://mp.weixin.qq.com/s/xwhmKYeCc_TlkDk-NwuGbw" class="btn btn-primary">查看详情</a>
+      </div>
+      <div class="col-lg-6 text-right wow fadeInRight">
+        <img src="/assets/case/jd.png" alt="service" class="img-responsive pull-right">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="row m-b-lg">
+      <div class="col-lg-12 text-center">
+        <div class="navy-line"></div>
+        <h1>媒体报道</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-10 col-lg-offset-1 slick_demo_1">
+        <div>
+          <a target="_blank" href="https://www.digitaling.com/articles/43246.html">
+          <h2>“广告狗”出身的自媒体人，为什么她能盛产好故事？</h2>
+          <p>
+            相对那些从四五年前就开始运营的自媒体公众号而言，2016年年末诞生的“人类关怀计划”，有点赶不上好时候。但半年后，“人类关怀计划”粉丝量3万，平均阅读量2万。现在，粉丝量达二三十万，平均阅读量五万。接广告，建立团队，成功变现……虽错过红利期，但在这片红海里，“人类关怀计划”称得上是优等生了。
+          </p>
+          </a>
+        </div>
+
+        <div>
+          <a target="_blank" href="https://mp.weixin.qq.com/s/dfd-7JZ4Bzx5zs5HHYe1Ag">
+          <h2>人类关怀计划：如何打造一篇病毒式传播文案？</h2>
+          <p>
+            关于我自己：我的故事与经验 第一、初涉商界：我收获的那些经验。我最近一份工作是在一家百人规模的新媒体广告公司的项目总监，之前的工作也一直聚焦新媒体界，但我觉得越来越不对劲。后来我发现不对劲是因为我一直在为别人打工，不管我做了多少爆款，工资也没多大波动，甲方也无法给我提供精神上的温暖回馈，于是我辞职了，成为了一名光荣的个体户。
+          </p>
+          </a>
+        </div>
+
+        <div>
+          <a target="_blank" href="https://mp.weixin.qq.com/s/iB_N_TG1yvG7_sNBsFHZ7g">
+          <h2>平均阅读50000+，1篇文章涨粉近2万......</h2>
+          <p>
+            上周，微信之父张小龙在微信公开课Pro上表示，针对运营者的微信公众平台后台管理APP很快就会推出。前天就有人传出被邀请内测订阅号APP的消息，虽然目前还不知道APP具体功能和影响力，但只有精耕内容，找到适合的内容展现方式，才可能在变化的大环境中找到发展的核心能力。
+          </p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+      <div class="row m-b-lg">
+        <div class="col-lg-12 text-center">
+          <div class="navy-line"></div>
+          <h1>合作步骤</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>步骤</th>
+              <th>周期</th>
+              <th>说明</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+              <td><span class="label label-primary">1</span></td>
+              <td>递交Brief</td>
+              <td> - </td>
+              <td>Brief里需要包括“本次推广关键词”。“关键词”的定义：概念，4字以下、对全文核心具有高度概括性的形容词或名词（如：“疗愈”、“去油腻”、“潮流icon”、“轻生活”）</td>
+            </tr>
+            <tr>
+              <td><span class="label label-primary">2</span></td>
+              <td>订金支付</td>
+              <td> - </td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><span class="label label-primary">3</span></td>
+              <td>创意大纲</td>
+              <td>1天</td>
+              <td>“大纲”的定义: 500字以内，围绕着客户给到的要点和Brief进行撰写，分为“创意来源”、“内容梗概”、“风格描述”、 “脚本示例”4块内容，让客户对具体想法有个大致的了解。</td>
+            </tr>
+            <tr>
+              <td><span class="label label-primary">4</span></td>
+              <td>具体剧本</td>
+              <td>2天</td>
+              <td>在确认大纲后，推进制作剧本。此阶段是成稿的文字版，因为没有图片，离最后的成稿展示尚存在一定的差距</td>
+            </tr>
+            <tr>
+              <td><span class="label label-primary">5</span></td>
+              <td>绘制漫画</td>
+              <td>3天</td>
+              <td>在确认剧本后，开始推进漫画的绘制工作</td>
+            </tr>
+            <tr>
+              <td><span class="label label-primary">6</span></td>
+              <td>排版成稿</td>
+              <td>1天</td>
+              <td>确认漫画后，将漫画编排到微信公众号上</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+  </div>
+</section>
+
+<section>
+  <div class="container">
+      <div class="row m-b-lg">
+        <div class="col-lg-12 text-center">
+          <div class="navy-line"></div>
+          <h1>合作原则（五不接）</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-12">
+          <table class="table">
+            <tbody>
+            <tr>
+              <td><span class="label label-plain">1</span></td>
+              <td><strong>不接医美、金融理财投资、保健药品、低端游戏广告</strong><br>
+              <small>如整容、P2P理财、壮阳丹、非知名页游/手游等</small></td>
+            </tr>
+            <tr>
+              <td><span class="label label-plain">2</span></td>
+              <td><strong>不接地域性广告 / 特定群体向的广告</strong><br>
+              <small>如只开在山东枣庄的某一饭馆想要宣传引客，建议你去做LBS类地推广告。我们对宣传效果负责，恕不接富二代玩票型广告</small></td>
+            </tr>
+            <tr>
+              <td><span class="label label-plain">3</span></td>
+              <td><strong>不接冲销量类广告</strong><br>
+              <small>抱着“通过公众号广告的引流达到销量目标”的广告主—新媒体广告更着眼于品牌的宣传，想要销售导向的建议投放流量联盟的广告</small></td>
+            </tr>
+            <tr>
+              <td><span class="label label-plain">4</span></td>
+              <td><strong>不接需求点不明晰的广告</strong><br>
+              <small>您需要将产品的信息点进行整理，总结归纳出一个核心的宣传信息点，如果客户要求必须涉及到3个以上、相互间低相关度的宣传信息（如：某 个线下活动+产品A特点+产品B特点+公司品牌文化)，恕不接单</small></td>
+            </tr>
+            <tr>
+              <td><span class="label label-plain">5</span></td>
+              <td><strong>不接拖欠尾款的广告</strong></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+  </div>
+</section>
+
+<section id="pricing" class="pricing">
+    <div class="container">
+
+        <div class="row m-b-lg">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>制作 + 投放套餐 *</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 wow zoomIn">
+                <ul class="pricing-plan list-unstyled">
+                  <li class="pricing-title">
+                    创作自由套餐
+                  </li>
+                  <li class="pricing-price">
+                    <span>35万</span>
+                  </li>
+                  <li>
+                    文中软植入：2次
+                  </li>
+                  <li>
+                    图中软植入：2次
+                  </li>
+                  <li>
+                    文末硬植入：2次
+                  </li>
+                  <li>
+                    广告区分：无
+                  </li>
+                  <li>
+                    广告文案：300字
+                  </li>
+                  <li>
+                    海报/视频：1～2次
+                  </li>
+                  <li>
+                    海报二维码：无
+                  </li>
+                  <li>
+                    阅读原文：无
+                  </li>
+                  <li>
+                    每步骤修改次数：1次
+                  </li>
+                  <li>
+                    <a class="btn btn-primary btn-xs" href="#" onclick="invite()">立即邀约</a>
+                  </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 wow zoomIn">
+                <ul class="pricing-plan list-unstyled">
+                  <li class="pricing-title">
+                    温和客户套餐
+                  </li>
+                  <li class="pricing-price">
+                    <span>41万</span>
+                  </li>
+                  <li>
+                    文中软植入：3次
+                  </li>
+                  <li>
+                    图中软植入：5次
+                  </li>
+                  <li>
+                    文末硬植入：2次
+                  </li>
+                  <li>
+                    广告区分：有
+                  </li>
+                  <li>
+                    广告文案：500字
+                  </li>
+                  <li>
+                    海报/视频：1～2次
+                  </li>
+                  <li>
+                    海报二维码：有
+                  </li>
+                  <li>
+                    阅读原文：有
+                  </li>
+                  <li>
+                    每步骤修改次数：4次
+                  </li>
+                  <li class="plan-action">
+                    <a class="btn btn-primary btn-xs" href="#" onclick="invite()">立即邀约</a>
+                  </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-4 wow zoomIn">
+                <ul class="pricing-plan list-unstyled">
+                    <li class="pricing-title">
+                      强势客户套餐
+                    </li>
+                    <li class="pricing-price">
+                      <span>47万</span>
+                    </li>
+                    <li>
+                      文中软植入：不限
+                    </li>
+                    <li>
+                      图中软植入：不限
+                    </li>
+                    <li>
+                      文末硬植入：不限
+                    </li>
+                    <li>
+                      广告区分：有
+                    </li>
+                    <li>
+                      广告文案：500字
+                    </li>
+                    <li>
+                      海报/视频：1～2次
+                    </li>
+                    <li>
+                      海报二维码：有
+                    </li>
+                    <li>
+                      阅读原文：有
+                    </li>
+                    <li>
+                      每步骤修改次数：4次
+                    </li>
+                    <li>
+                      <a class="btn btn-primary btn-xs" href="#" onclick="invite()">立即邀约</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row m-t-lg">
+            <div class="col-lg-8 col-lg-offset-2 text-center m-t-lg">
+                <small>* 此报价不含税，报价有效期至<span class="navy">2018年10月30日</span>；<br>关于发票，增值税专票，默认为“开三付六”；<br>报价及权益解释权归宁波极乐大梦文化创意有限公司所有。</small>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="row m-b-lg">
+            <div class="col-lg-12 text-center">
+                <div class="navy-line"></div>
+                <h1>投放套餐</h1>
+            </div>
+        </div>
+
+        <table class="table">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>方式</th>
+            <th>报价</th>
+            <th>说明</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><span class="label label-primary">1</span></td>
+            <td>文章顶部冠名</td>
+            <td>11万</td>
+            <td>开头“导语”的字样；客户名称、LOGO和Slogan；一句话介绍客户（15字以内）</td>
+          </tr>
+          <tr>
+            <td><span class="label label-primary">2</span></td>
+            <td>底部广告位出租</td>
+            <td>10万</td>
+            <td>人关与品牌合作的名称；根据客户要求和人关品牌调性定制文案（50字以内）；图片长宽比5:4；客户提供内容素材，我方进行设计</td>
+          </tr>
+          <tr>
+            <td><span class="label label-primary">3</span></td>
+            <td>评论区置顶</td>
+            <td>1.5万</td>
+            <td>文章推送后，由我方提供或客户撰写评论，公众号第一时间进行评论置顶</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="col-lg-12 text-center m-t-lg">
+      <a href="http://demo.leilongkeji.com/register" class="btn btn-primary more" onclick="invite()">立即邀约</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="gray-section">
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <div class="navy-line"></div>
+      <h1>码上联系我们</h1>
+      <p>打开微信扫描下方二维码</p>
+    </div>
+  </div>
+
+  <div class="row features-block">
+    <div class="col-sm-12 text-center">
+      <img alt="contact" src="/assets/landing/qrcode.jpg" width="190" height="190">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="m-t-lg m-b-lg text-center">
+      <p>Copyright &copy; 2018. All rights reserved</p>
+    </div>
+  </div>
+</section>
+
+<!-- Mainly scripts -->
+<script src="/assets/backjs/jquery-3.1.1.min.js"></script>
+<script src="/assets/backjs/bootstrap.min.js"></script>
+<script src="/assets/backjs/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="/assets/backjs/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="/assets/backjs/inspinia.js"></script>
+<script src="/assets/backjs/plugins/wow/wow.min.js"></script>
+<!-- TagCloud -->
+<script src="/assets/backjs/plugins/jqcloud/jqcloud.min.js"></script>
+<!-- Sparkline -->
+<script src="/assets/backjs/plugins/sparkline/jquery.sparkline.min.js"></script>
+<!-- slick carousel-->
+<script src="/assets/backjs/plugins/slick/slick.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('body').scrollspy({
+      target: '.navbar-fixed-top',
+      offset: 80
+    });
+
+    // Page scrolling feature
+    $('a.page-scroll').bind('click', function(event) {
+      var link = $(this);
+      $('html, body').stop().animate({
+        scrollTop: $(link.attr('href')).offset().top - 50
+      }, 500);
+      event.preventDefault();
+      $("#navbar").collapse('hide');
+    });
+  });
+
+  function invite(){
+    var flag=0;
+  
+    var order_data={  
+                   'campaign_id':jQuery("#campaign_id").val(),
+                   'marketer_id':jQuery("#marketer_id").val(),
+                   'creator_id':jQuery("#creator_id").var()
+                   } 
+     jQuery.ajax({    
+      type: "POST",
+      url: "/checkinvite",
+      data: order_data,
+      dataType:"JSON",
+      success: function(data){
+        alert(data.total);
+        if(data.total=="0"){
+           flag=1;
+        }
+              // $("#btn_invite").attr("orderId",data);
+              // $('#btn_invite').text('取消邀请');
+              //$("#r_"+seq).attr("attrStatus","1");
+              //$("#inviteStatus_"+seq).text("已邀请");
+      },
+      error: function(){}
+    })
+  if(flag==1){
+    
+    jQuery.ajax({    
+      type: "POST",
+      url: "/orders",
+      data: order_data,
+      success: function(data){
+              //$("#btn_invite").attr("orderId",data);
+              //$('#btn_invite').text('取消邀请');
+              //$("#r_"+seq).attr("attrStatus","1");
+              //$("#inviteStatus_"+seq).text("已邀请");
+      },
+      error: function(){}
+    })
+}
+
+  }
+  var cbpAnimatedHeader = (function() {
+    var docElem = document.documentElement,
+      header = document.querySelector( '.navbar-default' ),
+      didScroll = false,
+      changeHeaderOn = 200;
+    function init() {
+      window.addEventListener( 'scroll', function( event ) {
+        if( !didScroll ) {
+          didScroll = true;
+          setTimeout( scrollPage, 250 );
+        }
+      }, false );
+    }
+    function scrollPage() {
+      var sy = scrollY();
+      if ( sy >= changeHeaderOn ) {
+        $(header).addClass('navbar-scroll')
+      }
+      else {
+        $(header).removeClass('navbar-scroll')
+      }
+      didScroll = false;
+    }
+    function scrollY() {
+      return window.pageYOffset || docElem.scrollTop;
+    }
+    init();
+  })();
+
+  // Activate WOW.js plugin for animation on scrol
+  new WOW().init();
+
+  var host = "http://demo.leilongkeji.com"
+  $("a.login").attr("href", host + '/login')
+  $("a.more").attr("href", host + '/register')
+</script>
+
+<script>
+  $(document).ready(function() {
+    var sparklineCharts = function(){
+      $("#sparkline5").sparkline([90, 10], {
+         type: 'pie',
+         height: '140',
+         sliceColors: ['#1ab394', '#F5F5F5']
+      });
+
+      $("#sparkline6").sparkline([52, 48], {
+         type: 'pie',
+         height: '140',
+         sliceColors: ['#1ab394', '#F5F5F5']
+      });
+
+      $("#sparkline7").sparkline([60, 40], {
+         type: 'pie',
+         height: '140',
+         sliceColors: ['#1ab394', '#F5F5F5']
+      });
+
+      $("#sparkline8").sparkline([85, 15], {
+         type: 'pie',
+         height: '140',
+         sliceColors: ['#1ab394', '#F5F5F5']
+      });
+    };
+    var sparkResize;
+    $(window).resize(function(e) {
+        clearTimeout(sparkResize);
+        sparkResize = setTimeout(sparklineCharts, 500);
+    });
+    sparklineCharts();
+  });
+</script>
+
+<script type="text/javascript">
+  var words = [
+    {text: "和谐", weight: 11},
+    {text: "民主", weight: 10},
+    {text: "文明", weight: 9},
+    {text: "法治", weight: 8},
+    {text: "伟大", weight: 7},
+    {text: "光荣", weight: 6},
+    {text: "开放", weight: 5}
+  ];
+  // $('#demo').jQCloud(words);
+  $('#demo').jQCloud(words, {
+    classPattern: null,
+    colors: ["#800026", "#bd0026", "#e31a1c", "#fc4e2a", "#fd8d3c", "#feb24c", "#fed976", "#ffeda0"],
+    fontSize: {
+      from: 0.05,
+      to: 0.01
+    }
+  });
+
+</script>
+
+<script>
+  $(document).ready(function(){
+    $('.slick_demo_1').slick({
+        dots: true
+    });
+  });
+</script>
+
+</body>
+</html>

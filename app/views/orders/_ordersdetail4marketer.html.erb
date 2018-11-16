@@ -1,0 +1,458 @@
+<style>
+.hidepart{display:none;}
+</style>
+<script type="text/javascript"> 
+  var xmlHttpReg = null; 
+  var currentseq=-1;
+  function updatemessage(seq){
+    currentseq=seq;
+   var order_id=document.getElementById("order_id").value;
+ if (window.ActiveXObject) {
+                         xmlHttpReg = new ActiveXObject("Microsoft.XMLHTTP");            
+                          } 
+                          else if (window.XMLHttpRequest) {               
+                           xmlHttpReg = new XMLHttpRequest(); 
+                                     }           
+
+                               if (xmlHttpReg != null) {                
+                                   xmlHttpReg.open("post", "updatemessages?order_id="+order_id +"&order_step="+seq, true);                
+                                 xmlHttpReg.send();         
+                                 xmlHttpReg.onreadystatechange = doMessageResult; 
+                                                } 
+
+  }
+function doMessageResult() {                
+ if (xmlHttpReg.readyState == 4 && xmlHttpReg.status == 200) {  
+        document.getElementById("msg_"+currentseq).innerText ="";
+   //document.getElementById("post_div_"+currentseq).classList.add("hidepart");
+   //document.getElementById("post_p_"+currentseq).classList.add("hidepart");
+   //document.getElementById("post_a_"+currentseq).innerHTML=xmlHttpReg.responseText;
+ }
+}
+
+  function submitcomments(){
+   var order_id=document.getElementById("order_id").value;
+   var content_comment=document.getElementById("comments").value;
+ if (window.ActiveXObject) {
+                         xmlHttpReg = new ActiveXObject("Microsoft.XMLHTTP");            
+                          } 
+                          else if (window.XMLHttpRequest) {               
+                           xmlHttpReg = new XMLHttpRequest(); 
+                                     }           
+
+                               if (xmlHttpReg != null) {                
+                                   xmlHttpReg.open("post", "updatecomments?order_id="+order_id +"&content_comment="+content_comment, true);                
+                                 xmlHttpReg.send();         
+                                 xmlHttpReg.onreadystatechange = doCommentResult; 
+                                                } 
+
+  }
+  function doCommentResult() {                
+ if (xmlHttpReg.readyState == 4 && xmlHttpReg.status == 200) {  
+   alert('评价成功');
+   //document.getElementById("post_div_"+currentseq).classList.add("hidepart");
+   //document.getElementById("post_p_"+currentseq).classList.add("hidepart");
+   //document.getElementById("post_a_"+currentseq).innerHTML=xmlHttpReg.responseText;
+ }
+}
+</script>
+ <%current_user%>
+<input type="hidden" name="order_id" id="order_id" value="<%=@orders[0].id%>"/>
+<input type="hidden" name="user_id" id="user_id" value="<%=@user.id%>"/>
+<input type="hidden" name="creatorstatus" id="creatorstatus" value="1"/>
+<input type="hidden" name="marketerstatus" id="marketerstatus" value="0"/>
+<input type="hidden" name="adminstatus" id="adminstatus" value="1"/>
+<div class="row border-bottom">
+        <div class="ibox-title">
+          <p>订单号：<strong><%=@orders[0].id%></strong></p>
+        </div>
+      </div>
+
+      <div class="fh-breadcrumb">
+        <div class="fh-column">
+          <div class="full-height-scroll">
+            <ul class="list-group elements-list">
+                <li class="list-group-item active">
+                  <a data-toggle="tab" href="#tab-1">
+                    <span class="pull-right badge badge-danger"></span>
+                    <strong>需求详情</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span>
+                        
+                    </div>
+                  </a>
+                </li>
+                <li onclick="updatemessage(1)" class="list-group-item">
+                  <a data-toggle="tab" href="#tab-2">
+                     <%if @mestotal_1==0%>
+                   <span class="pull-right badge badge-danger" id="msg_1"></span>
+                    <%else%>
+                    <span class="pull-right badge badge-danger" id="msg_1"><%=@mestotal_1%>
+                    </span> 
+                    <%end%>
+                    <strong>要点提炼</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span>
+                      <i class="fa fa-clock-o"></i><%if@steporder_1[0].messagetime !=nil%><%=@steporder_1[0].messagetime.strftime("%Y-%m-%d %H:%M")%><%end%>  
+                    </div>
+                  </a>
+                </li>
+                <li onclick="updatemessage(2)" class="list-group-item">
+                  <a data-toggle="tab" href="#tab-3">
+                     <%if @mestotal_2==0%>
+                   <span class="pull-right badge badge-danger" id="msg_2"></span>
+                    <%else%>
+                    <span class="pull-right badge badge-danger" id="msg_2"><%=@mestotal_2%></span>
+                      
+                    <%end%>
+                   
+                    <strong>创意大纲</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span> 
+                      <i class="fa fa-clock-o"></i><%if @steporder_2[0].messagetime!=nil%><%=@steporder_2[0].messagetime.strftime("%Y-%m-%d %H:%M")%> <%end%> 
+                    </div>
+                  </a>
+                </li>
+                <li onclick="updatemessage(3)" class="list-group-item">
+                  <a data-toggle="tab" href="#tab-4">
+                    <%if @mestotal_3==0%>
+                   <span class="pull-right badge badge-danger" id="msg_3"></span>
+                    <%else%>
+                    <span class="pull-right badge badge-danger" id="msg_3"><%=@mestotal_3%></span>
+                      
+                    <%end%>
+                    <strong>具体脚本</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span></span>
+                      <i class="fa fa-clock-o"></i><%if @steporder_3[0].messagetime!=nil%><%=@steporder_3[0].messagetime.strftime("%Y-%m-%d %H:%M")%> <%end%>  
+                    </div>
+                  </a>
+                </li>
+                <li onclick="updatemessage(4)" class="list-group-item">
+                  <a data-toggle="tab" href="#tab-5">
+                     <%if @mestotal_4==0%>
+                   <span class="pull-right badge badge-danger" id="msg_4"></span>
+                    <%else%>
+                    <span class="pull-right badge badge-danger" id="msg_4"><%= @mestotal_4%></span>
+                      
+                    <%end%>
+                    <strong>绘图视频</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span></span>
+                      <i class="fa fa-clock-o"></i><%if @steporder_4[0].messagetime!=nil%><%=@steporder_4[0].messagetime.strftime("%Y-%m-%d %H:%M")%> <%end%>
+                    </div>
+                  </a>
+                </li>
+                <li onclick="updatemessage(5)" class="list-group-item">
+                  <a data-toggle="tab" href="#tab-6">
+                     <%if @mestotal_5==0%>
+                   <span class="pull-right badge badge-danger" id="msg_5"></span>
+                    <%else%>
+                    <span class="pull-right badge badge-danger" id="msg_5"><%= @mestotal_5%></span>
+                      
+                    <%end%>
+                    <strong>排版成稿</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span></span>
+                      <i class="fa fa-clock-o"></i>  <%if @steporder_5[0].messagetime!=nil%><%=@steporder_5[0].messagetime.strftime("%Y-%m-%d %H:%M")%> <%end%>  
+                    </div>
+                  </a>
+                </li>
+                <li class="list-group-item">
+                  <a data-toggle="tab" href="#tab-7">
+                    <span class="pull-right badge badge-danger"></span>
+                    <strong>合作评价</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span>
+                         
+                    </div>
+                  </a>
+                </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="full-height">
+          <div class="full-height-scroll white-bg border-left">
+              <div class="element-detail-box">
+                  <div class="tab-content">
+                    <div id="tab-1" class="tab-pane active">
+                      <h3>需求详情</h3>
+                      <table class="table">
+                        <thead>
+                        <tr>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                         <tr>
+                          <td><div><strong class="small">项目名称 / 关键信息</strong></div>
+                          <small><%=@orders[0].name%> / <%=@orders[0].description%> </small></td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div><strong class="small">投放日期 / 预算</strong></div>
+                            <small><%=@orders[0].start%>  / <%=@orders[0].budget%>  </small>
+                            <div><strong class="small">联系方式</strong></div>
+                            <small><%=@orders[0].address%> <br> <%=@orders[0].truename%>/<%=@orders[0].mobile%></small>
+                          </td>
+                        </tr>
+                         <%if @orders[0].attachment !=nil%>
+                        <tr>
+                          <td>
+                            <input type="hidden" name="attachmentname" value="<%=@orders[0].attachment%>"/>
+                            <span class="small"><i class="fa fa-paperclip"></i> 附件 - <a href="javascript:downloadattachment();">@orders[0].attachment</a></span>
+                          </td>
+                        </tr>
+                          <%end%>
+                        <tr>
+                          <td>
+                            <%if @orders[0].status=="0"%>
+                              <small>等待<%=@orders[0].username%>接收</small>
+                            <%elsif @orders[0].status=="-1"%>
+                            <small><%=@orders[0].username%><strong class="text-navy">已拒绝</strong>邀约</small>
+                            <%else%>
+                             <small><%=@orders[0].username%><strong class="text-navy">已接收</strong>邀约</small>
+                            <%end%>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+   
+                      <table class="table small">
+                        <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>项目阶段</th>
+                          <th>工作日数</th>
+                          <th>交付日期</th>
+                        </tr>
+                        </thead>
+<% @schedules.each_with_index do |schedule,i| %>      
+<%if i==0%>
+                          <tr>
+                          <td>1</td>
+                          <td>要点提炼</td>
+                          <td><%=schedule.workdays%></td>
+                          <td><%if schedule.ends_on==nil%>
+                           <%else%>
+                             <%=schedule.ends_on.strftime('%Y-%m-%d')%>点以前
+                           <%end%></td>
+                        </tr>
+ <%elsif i==1%>
+
+   <tr>
+                          <td>1</td>
+                          <td>创意大纲</td>
+                          <td><%=schedule.workdays%></td>
+                          <td><%if schedule.ends_on==nil%>
+                           <%else%>
+                             <%=schedule.ends_on.strftime('%Y-%m-%d')%>点以前
+                           <%end%></td>
+                        </tr>
+ <%elsif i==2%>
+  <tr>
+                          <td>1</td>
+                          <td>具体脚本</td>
+                          <td><%=schedule.workdays%></td>
+                          <td><%if schedule.ends_on==nil%>
+                           <%else%>
+                             <%=schedule.ends_on.strftime('%Y-%m-%d')%>点以前
+                           <%end%></td>
+                        </tr>
+
+ <%elsif i==3%>
+  <tr>
+                          <td>1</td>
+                          <td>绘图/视频</td>
+                          <td><%=schedule.workdays%></td>
+                          <td><%if schedule.ends_on==nil%>
+                           <%else%>
+                             <%=schedule.ends_on.strftime('%Y-%m-%d')%>点以前
+                           <%end%></td>
+                        </tr>
+<%elsif i==4%>
+  <tr>
+                          <td>1</td>
+                          <td>排版成稿</td>
+                          <td><%=schedule.workdays%></td>
+                          <td><%if schedule.ends_on==nil%>
+                           <%else%>
+                             <%=schedule.ends_on.strftime('%Y-%m-%d')%>点以前
+                           <%end%></td>
+                        </tr>
+                        <%end%>  
+                        <%end%>       
+                        </tbody>
+                      </table>               
+                    </div>
+             
+ <div id="tab-2" class="tab-pane">
+                     
+                      <h3>要点提炼</h3>
+                  <p>
+                    <a id="post_a_2" href="<%=@schedules[0].post_content%>" target="blank">
+                   <%=@schedules[0].post_content%>
+                   </a>
+                  </p>
+                  <div class="hr-line-dashed"></div>
+
+
+                  <div class="feed-activity-list">
+                    <!-- STEP 1 -->
+                    <!-- Messages List BEGIN -->
+                    <%   @messages = Message.where(order_id:@order_id,step_order:1) %>
+                    <div id="messages_list_1">
+                      <%= render @messages %>
+                    </div>
+
+                    <div class="input-group">
+                      <input type="text" data-behavior="room_speaker_1" class="form-control" id="step_order_1">
+                      <span class="input-group-btn">
+                      <button type="button" class="btn btn-primary">按回车发布</button>
+                      </span>
+                    </div>
+
+
+                    <!-- Messages List END -->
+                  </div>
+                </div>
+
+                <div id="tab-3" class="tab-pane">
+                 
+                  
+                  <h3>创意大纲</h3>
+                  <p>
+                    <a id="post_a_2" href="<%=@schedules[1].post_content%>" target="blank">
+                    <%=@schedules[1].post_content%>
+                    </a>
+                  </p>
+                   
+
+                  
+                  <div class="hr-line-dashed"></div>
+                  <div class="feed-activity-list">
+                    <!-- STEP 2 -->
+                    <!-- Messages List BEGIN -->
+                    <% @messages = Message.where(order_id:@order_id,step_order:2) %>
+                    <div id="messages_list_2">
+                      <%= render @messages %>
+                    </div>
+
+                    <div class="input-group">
+                      <input type="text" data-behavior="room_speaker_2" class="form-control" id="step_order_2">
+                      <span class="input-group-btn">
+                      <button type="button" class="btn btn-primary">按回车发布</button>
+                      </span>
+                    </div>
+                    <!-- Messages List END -->
+                  </div>
+                </div>
+
+                <div id="tab-4" class="tab-pane">
+                   
+                  <h3>具体脚本</h3>
+                  <p>
+                    <a href="<%=@schedules[2].post_content%>" target="blank">
+                    <%=@schedules[2].post_content%>
+                    </a>
+                  </p>
+                     
+
+                  <div id="post_div_3" class="form-group hidepart">
+                    <button class="btn btn-sm btn-primary" onclick="updatepost(3)" id="post_btn_3" type="button">提交
+                    </button>
+                  </div>
+                  <div class="hr-line-dashed"></div>
+                  <div class="feed-activity-list">
+                    <!-- STEP 3 -->
+                    <!-- Messages List BEGIN -->
+                    <% @messages = Message.where(order_id:@order_id,step_order:3) %>
+                    <div id="messages_list_3">
+                      <%= render @messages %>
+                    </div>
+
+                    <div class="input-group">
+                      <input type="hidden" name="schedule_3" value="<%@schedules[0].id%>"/>
+                    
+                      <input type="text" data-behavior="room_speaker_3" class="form-control" id="step_order_3">
+                      <span class="input-group-btn">
+                      <button type="button" class="btn btn-primary">按回车发布</button>
+                      </span>
+                    </div>
+                    <!-- Messages List END -->
+                  </div>
+                </div>
+
+                <div id="tab-5" class="tab-pane">
+                   
+
+                  <h3>绘图/视频</h3>
+                  <p>
+                    <a href="<%=@schedules[3].post_content%>" target="blank">
+                    <%=@schedules[3].post_content%>
+                    </a>
+                  </p>
+                     
+
+                 
+                  <div class="hr-line-dashed"></div>
+                  <div class="feed-activity-list">
+                    <!-- STEP 4 -->
+                    <!-- Messages List BEGIN -->
+                    <% @messages = Message.where(order_id:@order_id,step_order:4) %>
+                    <div id="messages_list_4">
+                      <%= render @messages %>
+                    </div>
+
+                    <div class="input-group">
+                      <input type="text" data-behavior="room_speaker_4" class="form-control" id="step_order_4">
+                      <span class="input-group-btn">
+                      <button type="button" class="btn btn-primary">按回车发布</button>
+                      </span>
+                    </div>
+                    <!-- Messages List END -->
+                  </div>
+                </div>
+
+                <div id="tab-6" class="tab-pane">
+                 
+
+                  <h3>排版成稿</h3>
+                  <p>
+                    <a href="<%=@schedules[4].post_content%>" target="blank">
+                    <%=@schedules[4].post_content%>
+                    </a>
+                    <input type="hidden" name="schedule_5" value="<%@schedules[4].id%>"
+                  </p>
+                  <div class="hr-line-dashed"></div>
+                  <div class="feed-activity-list">
+                    <!-- STEP 5 -->
+                    <!-- Messages List BEGIN -->
+                    <% @messages = Message.where(order_id:@order_id,step_order:5) %>
+                    <div id="messages_list_5">
+                      <%= render @messages %>
+                    </div>
+
+                    <div class="input-group">
+                      <input type="text" data-behavior="room_speaker_5" class="form-control" id="step_order_5">
+                      <span class="input-group-btn">
+                      <button type="button" class="btn btn-primary">按回车发布</button>
+                      </span>
+                    </div>
+                    <!-- Messages List END -->
+                  </div>
+                </div>
+                    <div id="tab-7" class="tab-pane">
+                      <div class="form-group">
+                        <h3>合作评价</h3>
+                        <textarea class="form-control" id="comments" name="comments" rows="3"></textarea>
+                      </div>
+                      <button class="btn btn-sm btn-primary" onclick="submitcomments()">提交</button>
+                    </div>
+
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>

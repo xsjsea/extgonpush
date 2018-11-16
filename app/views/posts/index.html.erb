@@ -1,0 +1,18 @@
+<div id="page-wrapper" class="gray-bg">
+  <div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+      <div class="col-lg-12">
+        <% if @posttype=="1"%>
+        <%= render 'cases' %>
+        <%else%>
+          <%= render 'reports' %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="pull-right">
+      <strong>GonPush.com</strong> &copy; 2018
+    </div>
+  </div>
+</div>

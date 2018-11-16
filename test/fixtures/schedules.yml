@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  campaign_id: 1
+  flow_name: 1
+  flow_order: 1
+  starts_on: 2018-09-21 05:31:30
+  ends_on: 2018-09-21 05:31:30
+  workdays: 1
+  status: 1
+  post_id: 1
+
+two:
+  campaign_id: 1
+  flow_name: 1
+  flow_order: 1
+  starts_on: 2018-09-21 05:31:30
+  ends_on: 2018-09-21 05:31:30
+  workdays: 1
+  status: 1
+  post_id: 1

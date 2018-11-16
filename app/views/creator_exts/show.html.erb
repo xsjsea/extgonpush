@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Userid:</strong>
+  <%= @creator_ext.userid %>
+</p>
+
+<p>
+  <strong>Tags set:</strong>
+  <%= @creator_ext.tags_set %>
+</p>
+
+<p>
+  <strong>Avatar:</strong>
+  <%= @creator_ext.avatar %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @creator_ext.category_id %>
+</p>
+
+<%= link_to 'Edit', edit_creator_ext_path(@creator_ext) %> |
+<%= link_to 'Back', creator_exts_path %>

@@ -1,0 +1,37 @@
+ 
+      <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="ibox-title">
+          <h5>评价列表</h5>
+        </div>
+
+        <div class="ibox-content">
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>活动</th>
+                <th>内容</th>
+                <th>来源</th>
+                <th>时间</th>
+              </tr>
+              </thead>
+              <tbody>
+
+               <% @comments.each_with_index do |comment,i| %>
+              <tr>
+                <td>1</td>
+                <td><a href="javascript:void();"><%=comment.name%></a></td>
+                <td><%=comment.comment_content%></td>
+                <td><%=comment.username%></td>
+                <td><%=comment.created_at.strftime('%Y-%m-%d')%></td>
+              </tr>
+              <%end%>
+              </tbody>
+            </table>
+             <%=will_paginate @comments,:class=>"pagination",:previous_label=>"上一页",:next_label=>"下一页"%>
+          </div>
+        </div>
+  </div>
+      

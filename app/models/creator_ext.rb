@@ -1,0 +1,2 @@
+class CreatorExt < ApplicationRecord
+end

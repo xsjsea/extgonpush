@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  areaName: MyString
+  area_level: 1
+  area_sequence: 1
+  parent_id: 1
+
+two:
+  areaName: MyString
+  area_level: 1
+  area_sequence: 1
+  parent_id: 1

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  service_name: MyString
+  service_description: MyString
+  service_price: 1.5
+  creator_id: 1
+
+two:
+  service_name: MyString
+  service_description: MyString
+  service_price: 1.5
+  creator_id: 1

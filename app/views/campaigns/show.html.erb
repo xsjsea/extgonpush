@@ -1,0 +1,214 @@
+<script type="text/javascript">
+  function checkCreator(seq,creatorId){
+    var avatar=$("#avatar"+seq).val();
+    var src="/uploads/"+avatar;
+    $("#avatarattr").attr("src",src);
+    
+
+    var userName=$("#usrName_"+seq).text() ;
+    $("#detailUsrName").text(userName);
+    var userDescription=$("#userDescription_"+seq).val() ;
+    $("#userDescription").text(userDescription);
+
+    var fans=$("#fans_"+seq).text() ;
+    $("#fans").text(fans);
+    var reader=$("#reader_"+seq).text() ;
+    $("#reader").text(reader);
+    var price=$("#price_"+seq).text() ;
+    $("#price").text(price);
+
+    var curStatus=$("#r_"+seq).attr("attrStatus");
+    if(curStatus==0){
+      $("#btn_invite").text("邀请");
+      $("#btn_invite").attr("seq",seq);
+      $("#btn_invite").attr("attrCreatorId",creatorId);
+    }else{
+      $("#btn_invite").text("取消邀请");
+      $("#btn_invite").attr("seq",seq);
+      $("#btn_invite").attr("attrCreatorId",creatorId);
+    }
+ 
+    var order_data={creator_id:creatorId}
+      $.ajax({    
+      type: "POST",
+      url: "/getservice",
+      data: order_data,
+      success: function(data){
+         var serviceHtml="";
+         jQuery.each(data, function(i,item){    
+                serviceHtml=serviceHtml+'<h5>#'+i+':'+item.service_name
+                +'</h5><span class="text-navy small">'+item.service_price
+                +'元</span><p>'+item.service_description
+                +'</p><hr/>'
+              })
+ 
+          $("#serviceModule").html(serviceHtml)
+           //alert(data);
+          //alert('success')
+      },
+      error:function(){alert('fail')
+
+      }
+               
+   }); 
+     
+}
+
+function checkDetail(){
+ campaign_id=$("#campaign_id").val();
+ marketer_id=$("#marketer_id").val();
+ creator_id=$("#btn_invite").attr("attrCreatorId"); 
+ window.location.href="/creatorinfo?creator_id="+creator_id+"&campaign_id="+campaign_id+"&marketer_id="+marketer_id;
+}
+  function invite(){
+    var seq=$("#btn_invite").attr("seq");
+    var curStatus=$("#r_"+seq).attr("attrStatus");
+     if(curStatus==0){//invite
+     
+      //generate order
+       //alert($("#btn_invite").attr("attrCreatorId"));
+       var order_data={  
+                   'campaign_id':$("#campaign_id").val(),
+                   'marketer_id':$("#marketer_id").val(),
+                   'creator_id':$("#btn_invite").attr("attrCreatorId"), 
+                   'status':'0'  
+         }  
+    $.ajax({    
+      type: "POST",
+      url: "/orders",
+      data: order_data,
+      success: function(data){
+              $("#btn_invite").attr("orderId",data);
+              $('#btn_invite').text('取消邀请');
+              $("#r_"+seq).attr("attrStatus","1");
+              $("#inviteStatus_"+seq).text("已邀请");
+      },
+      error: function(){}
+    })
+
+    }else{//cancel invite
+      var order_id=$("#btn_invite").attr("orderId");
+     
+      $.ajax({    
+      type: "post",
+      url: '/orders/destroy/'+order_id,
+      success: function(){
+        $("#r_"+seq).attr("attrStatus","0");
+        $("#inviteStatus_"+seq).text("未邀请");
+        $("#btn_invite").text("邀请");
+      },
+      error: function(){}
+    })
+
+      
+      //cancel order
+
+    }
+
+  }
+
+  function search(){
+   var searchword=$("#searchword").val();
+   if (searchword==''){
+    //alert("请输入搜索关键字");
+    //return;
+  }
+   window.location='/campaigns/1?searchword='+searchword;
+  }
+</script>
+<input type="hidden" name="marketer_id" id="marketer_id" value="<%=@user.id%>"/>
+<input type="hidden" name="campaign_id" id="campaign_id" value="<%=@campaign.id%>"/>
+<div id="page-wrapper" class="gray-bg">
+  <div class="wrapper wrapper-content  animated fadeInRight">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="ibox">
+
+          <div class="ibox-title">
+            <h5>筛选KOL</h5>
+            <!-- <span class="text-muted small pull-right">
+            最后更新: <i class="fa fa-clock-o"></i> 2018.12.06 下午2:10
+            </span> -->
+          </div>
+          <div class="ibox-content">
+              <div class="input-group">
+                <input type="text" placeholder="请输入关键字 " name="searchword" id="searchword" class="input form-control">
+                <span class="input-group-btn">
+                  <button onclick="search()" type="button" class="btn btn btn-primary">
+                    <i class="fa fa-search"></i> 搜索
+                  </button>
+                </span>
+              </div>
+              <div class="clients-list">
+                <div class="tab-pane active">
+                  <div id="creatorsdiv" class="full-height-scroll">
+                       <%= render partial: "creators" %>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <%if @creators.length>0%>
+      <div class="col-sm-4">
+        <div class="ibox ">
+          <div class="ibox-content">
+            <div class="tab-content">
+              <div id="contact-1" class="tab-pane active">
+                  <div class="row m-b-lg">
+                      <div class="col-lg-4 text-center">
+                        <div class="m-b-sm" style="cursor: pointer;" onclick="checkDetail()">
+                          <img alt="image" class="img-circle" id="avatarattr"
+                          src="/uploads/<%=@creators[0].avatar%>"  onerror="this.src='/uploads/default_small.png'" style="width: 62px">
+                        </div>
+                      </div>
+                      <div class="col-lg-8">
+                          <strong id="detailUsrName">
+                            <%= @creators[0].username %> 
+                          </strong>
+                          <p id="userDescription">
+                             <%= @creators[0].description %> 
+                          </p>
+                         <button id="btn_invite" type="button" seq="0" attrCreatorId="<%= @creators[0].id%> " onclick="invite()"  class="btn btn btn-primary btn-block btn-block">
+                                邀请
+                         </button>
+                      </div>
+                  </div>
+                  <div class="client-detail">
+                    <div class="full-height-scroll">
+                        <strong>核心指标</strong>
+                        <ul class="list-group clear-list">
+                          <li class="list-group-item fist-item">
+                            <span class="pull-right" id="fans"><%=@creators[0].totalfans%> </span>
+                            粉丝数
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right" id="reader"><%=@creators[0].totalreaders%></span>
+                            阅读量
+                          </li>
+                          <li class="list-group-item">
+                            <span class="pull-right" id="praise"><%=@creators[0].totalpraises%>
+                            </span>
+                            点赞数
+                          </li>
+                        </ul>
+                        <strong>报价方案</strong>
+                        <hr />
+
+                      <%= render 'creatorservices' %>
+                    </div>
+                  </div>
+              </div>
+  
+          </div>
+        </div>
+      </div>
+      <%end%>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="pull-right">
+      <strong>GonPush.com</strong> &copy; 2018
+    </div>
+  </div>
+</div>

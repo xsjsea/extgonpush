@@ -1,0 +1,2 @@
+class Bizcase < ApplicationRecord
+end

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  report_author: 1
+  report_date: MyString
+  report_title: MyString
+  report_content: MyString
+  report_status: MyString
+  post_modified: 2018-09-27 23:20:15
+  report_type: MyString
+
+two:
+  report_author: 1
+  report_date: MyString
+  report_title: MyString
+  report_content: MyString
+  report_status: MyString
+  post_modified: 2018-09-27 23:20:15
+  report_type: MyString

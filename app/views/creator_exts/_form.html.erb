@@ -1,0 +1,37 @@
+<%= form_with(model: creator_ext, local: true) do |form| %>
+  <% if creator_ext.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(creator_ext.errors.count, "error") %> prohibited this creator_ext from being saved:</h2>
+
+      <ul>
+      <% creator_ext.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :userid %>
+    <%= form.number_field :userid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tags_set %>
+    <%= form.text_field :tags_set %>
+  </div>
+
+  <div class="field">
+    <%= form.label :avatar %>
+    <%= form.text_field :avatar %>
+  </div>
+
+  <div class="field">
+    <%= form.label :category_id %>
+    <%= form.number_field :category_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

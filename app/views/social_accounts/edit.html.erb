@@ -1,0 +1,73 @@
+ <div id="page-wrapper" class="gray-bg">
+      <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="ibox-title">
+          <h5>修改账号</h5>
+        </div>
+        <div class="ibox-content">
+             <form method="post" action="/upatesocialaccounts" method="post"   class="form-horizontal" id="frmAccount">
+              <input type="hidden" name="creator_id" value="<%=@social_account.creator_id%>"/>
+              <input type="hidden" name="account_id" value="<%=@social_account.id%>"/>
+   <div class="form-group"><label class="col-sm-2 control-label">渠道 </label>
+                  <div class="col-sm-10">
+                     <%@social_channels.each_with_index do |social_channel,i| %>
+                     <% if social_channel.id ==@social_account.channel_id%>
+                        <label class="radio-inline"><input type="radio" checked value="<%=social_channel.id%>" name="channel_id"><%=social_channel.name%></label>
+                      <%else%>
+                    <label class="radio-inline"><input type="radio" value="<%=social_channel.id%>" name="channel_id"><%=social_channel.name%></label>
+                    <%end%>
+                    <%end%>
+                  </div>
+                  
+                 
+                </div>
+                <div class="hr-line-dashed"></div>
+
+                <div class="form-group"><label class="col-sm-2 control-label">昵称 </label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" name="nickname" value="<%=@social_account.nickname%>"/>
+                  </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+
+                <div class="form-group"><label class="col-sm-2 control-label">粉丝数 </label>
+                  <div class="col-sm-10">
+                     <input type="text" class="form-control" name="fans"  value="<%=@social_account.fans%>"/>
+                  </div>
+                  </div> 
+      
+                <div class="hr-line-dashed"></div>
+                <div class="form-group"><label class="col-sm-2 control-label">阅读数 </label>
+                  <div class="col-sm-10">
+                      <input type="text" class="form-control" name="readers" value="<%=@social_account.readers%>" />
+                  </div>
+                 </div>
+       
+                <div class="hr-line-dashed"></div>
+                <div class="form-group"><label class="col-sm-2 control-label">点赞数 </label>
+                  <div class="col-sm-10">
+                      <input type="text" class="form-control" name="praises" value="<%=@social_account.praises%>"/>
+                   </div>
+                </div>
+                <div class="hr-line-dashed"></div>
+                <div class="form-group"><label class="col-sm-2 control-label">评论数 </label>
+                  <div class="col-sm-10">  
+                      <input type="text" class="form-control" name="comments" value="<%=@social_account.comments%>"/>
+                   </div>
+                </div>
+                  <input type="hidden" class="form-control" name="creator_id" value="<%=session['user_id']%>" />
+                  
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-sm-4 col-sm-offset-2">
+                    <input type="submit" value="保存" class="btn btn-primary">  
+                    </div>
+                </div>
+  </form>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="pull-right">
+          <strong>GonPush.com</strong> &copy; 2018
+        </div>
+      </div>
+    </div>

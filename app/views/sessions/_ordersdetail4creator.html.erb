@@ -1,0 +1,384 @@
+<script type="text/javascript">
+Date.prototype.format = function(format)
+{
+ var o = {
+ "M+" : this.getMonth()+1, //month
+ "d+" : this.getDate(),    //day
+ "h+" : this.getHours(),   //hour
+ "m+" : this.getMinutes(), //minute
+ "s+" : this.getSeconds(), //second
+ "q+" : Math.floor((this.getMonth()+3)/3),  //quarter
+ "S" : this.getMilliseconds() //millisecond
+ }
+ if(/(y+)/.test(format)) format=format.replace(RegExp.$1,
+ (this.getFullYear()+"").substr(4 - RegExp.$1.length));
+ for(var k in o)if(new RegExp("("+ k +")").test(format))
+ format = format.replace(RegExp.$1,
+ RegExp.$1.length==1 ? o[k] :
+ ("00"+ o[k]).substr((""+ o[k]).length));
+ return format;
+}
+  function addBusinessDays(d,n,i) {
+    var d = new Date();
+    d = new Date(d.getTime());
+    var day = d.getDay();
+    d.setDate(d.getDate() + n + (day === 6 ? 2 : +!day) + (Math.floor((n - 1 + (day % 6 || 1)) / 5) * 2));
+     $("#td_"+i).text(d.format('yyyy-MM-dd'));
+    return d;
+  }
+
+  function isInteger(obj) {
+    reg = /^[-+]?\d+$/;
+    if (!reg.test(obj) || obj < 0) {
+        return false;
+    } else {
+        return true;
+    }
+}
+  function caculateDay(i){
+     return;
+     var d = new Date();
+     alert(addBusinessDays(d,5,1));
+
+    var curDays=$("#input_"+i).val();
+    if(isInteger(curDays)){
+        addBusinessDays(curDays,i)
+
+    }else{
+      alert("输入大于0的整数");
+    }
+
+
+  }
+  //var d = new Date();
+  //alert(addBusinessDays(d,5,1));
+  function updateSchedule(){
+
+  var curDays=$("#input_1").val();
+  if(curDays==''){
+    alert("请输入要点提炼的工作日数");
+    return;
+  }
+
+   var curDays=$("#input_2").val();
+  if(curDays==''){
+    alert("请输入创意大纲的工作日数");
+    return;
+  }
+   var curDays=$("#input_3").val();
+  if(curDays==''){
+    alert("请输入具体脚本的工作日数");
+    return;
+  }
+   var curDays=$("#input_4").val();
+  if(curDays==''){
+    alert("请输入绘图视频的工作日数");
+    return;
+  }
+   var curDays=$("#input_5").val();
+  if(curDays==''){
+    alert("请输入排版成稿的工作日数");
+    return;
+  }
+   alert("排期提交成功");
+   $("#frmschedule").submit();
+  }
+</script>
+<div class="row border-bottom">
+        <div class="ibox-title">
+          <p>订单号：<strong></strong></p>
+        </div>
+      </div>
+
+      <div class="fh-breadcrumb">
+        <div class="fh-column">
+          <div class="full-height-scroll">
+            <ul class="list-group elements-list">
+                <li class="list-group-item active">
+                  <a data-toggle="tab" href="#tab-1">
+                    <span class="pull-right badge badge-danger">10</span>
+                    <strong>需求详情</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span>
+                      <i class="fa fa-clock-o"></i> 2018-09-12 12:00
+                    </div>
+                  </a>
+                </li>
+                <li class="list-group-item">
+                  <a data-toggle="tab" href="#tab-2">
+                    <span class="pull-right badge badge-danger">10</span>
+                    <strong>要点提炼</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span>
+                      <i class="fa fa-clock-o"></i> 2018-09-12 12:00
+                    </div>
+                  </a>
+                </li>
+                <li class="list-group-item">
+                  <a data-toggle="tab" href="#tab-3">
+                    <span class="pull-right badge badge-danger">10</span>
+                    <strong>创意大纲</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span>
+                      <i class="fa fa-clock-o"></i> 2018-09-12 12:00
+                    </div>
+                  </a>
+                </li>
+                <li class="list-group-item">
+                  <a data-toggle="tab" href="#tab-4">
+                    <span class="pull-right badge badge-danger">10</span>
+                    <strong>具体脚本</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span>
+                      <i class="fa fa-clock-o"></i> 2018-09-12 12:00
+                    </div>
+                  </a>
+                </li>
+                <li class="list-group-item">
+                  <a data-toggle="tab" href="#tab-5">
+                    <span class="pull-right badge badge-danger">10</span>
+                    <strong>绘图视频</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span>
+                      <i class="fa fa-clock-o"></i> 2018-09-12 12:00
+                    </div>
+                  </a>
+                </li>
+                <li class="list-group-item">
+                  <a data-toggle="tab" href="#tab-6">
+                    <span class="pull-right badge badge-danger">10</span>
+                    <strong>排版成稿</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span>
+                      <i class="fa fa-clock-o"></i> 2018-09-12 12:00
+                    </div>
+                  </a>
+                </li>
+                <li class="list-group-item">
+                  <a data-toggle="tab" href="#tab-7">
+                    <span class="pull-right badge badge-danger">10</span>
+                    <strong>合作评价</strong>
+                    <div class="small m-t-xs">
+                      <span class="label pull-right label-primary"></span>
+                      <i class="fa fa-clock-o"></i> 2018-09-12 12:00
+                    </div>
+                  </a>
+                </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="full-height">
+          <div class="full-height-scroll white-bg border-left">
+              <div class="element-detail-box">
+                  <div class="tab-content">
+                    <div id="tab-1" class="tab-pane">
+                      <h3>需求详情</h3>
+                      <table class="table">
+                        <thead>
+                        <tr>
+                          <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                          <td><div><strong class="small">项目名称 / 关键信息</strong></div>
+                          <small>  </small></td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div><strong class="small">投放日期 / 预算</strong></div>
+                            <small>  万 </small>
+                            <div><strong class="small">联系方式</strong></div>
+                            <small> </small>
+                          </td>
+                        </tr>
+                        </tbody>
+                      </table>
+                     <form id="frmschedule" method='post' action="/updateSchedule">
+                     <input type="hidden" value="457a1e93c3a23ec2c67f1dc468bde6a4a5539610" name="authenticity_token"/>  
+                      <table class="table small">
+                        <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>项目阶段</th>
+                          <th>工作日数</th>
+                          <th>交付日期</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        
+                        <% @schedules.each_with_index do |schedule,i| %>
+                        <input type="hidden" value="<%=schedule.id%>" name="scheduleId_<%=i%>" id="scheduleId_<%=i%>"/>
+                       <%if i==0%>
+                        <tr>
+                          <td>1</td>
+                          <td>要点提炼</td>
+
+                          <td><input onblur="caculateDay(1)" id="input_1" name="input_1" attrscheduleId="<%=schedule.id%>" type="text" size="2" value="<%=schedule.workdays%>"></td>
+                          <td id="td_1"><%if schedule.ends_on==nil%>
+                           <%else%>
+                             <%=schedule.ends_on.strftime('%Y-%m-%d')%>
+                           <%end%>
+                          </td>
+                        </tr>
+                        <%elsif i==1
+                          %>
+                           <tr>
+                          <td>2</td>
+                          <td >创意大纲</td>
+                           <td><input onblur="caculateDay(2)"  id="input_2" name="input_2" attrscheduleId="<%=schedule.id%>" type="text" size="2" value="<%=schedule.workdays%>"></td>
+                            <td id="td_2"><%if schedule.ends_on==nil%>
+                           <%else%>
+                            <%=schedule.ends_on.strftime('%Y-%m-%d')%>
+                           <%end%></td>
+                        </tr>
+                          <%elsif i==2
+                          %>
+                          <tr>
+                          <td>3</td>
+                          <td >具体脚本</td>
+                          <td><input onblur="caculateDay(3)"  id="input_3" name="input_3"  attrscheduleId="<%=schedule.id%>" type="text" size="2" value="<%=schedule.workdays%>"></td>
+                          <td id="td_3"><%if schedule.ends_on==nil%>
+                           <%else%>
+                             <%=schedule.ends_on.strftime('%Y-%m-%d')%>
+                           <%end%></td>
+                        </tr>
+                           <%elsif i==3
+                          %>
+                           <tr>
+                          <td>4</td>
+                          <td>绘图/视频</td>
+                           <td><input onblur="caculateDay(4)" id="input_4" name="input_4"  attrscheduleId="<%=schedule.id%>" type="text" size="2" value="<%=schedule.workdays%>"></td>
+                            <td id="td_4"><%if schedule.ends_on==nil%>
+                           <%else%>
+                             <%=schedule.ends_on.strftime('%Y-%m-%d')%>
+                           <%end%></td>
+                        </tr>
+                           <%elsif i==4
+                          %>
+                           <tr>
+                          <td>5</td>
+                          <td>排版成稿</td>
+                           <td><input onblur="caculateDay(5)" id="input_5" name="input_5"  attrscheduleId="<%=schedule.id%>" type="text" size="2" value="<%=schedule.workdays%>"></td>
+                           <td id="td_5"><%if schedule.ends_on==nil%>
+                           <%else%>
+                             <%=schedule.ends_on.strftime('%Y-%m-%d')%>
+                           <%end%></td>
+                        </tr>
+                       <%end%>
+
+                       <% end%>
+                        </tbody>
+                      </table>
+                      </form>
+                      <button class="btn btn-primary btn-sm" type="button" onclick="updateSchedule()">提交排期</button>                 
+                    </div>
+
+                    <div id="tab-2" class="tab-pane active">
+                      <div class="pull-right">
+                        <a href="javascript:;"><!-- 保存 --></a>
+                      </div>
+
+                      <h3>要点提炼</h3>
+                      <p class="small">提交在线文档链接，推荐使用石墨文档</p>
+                      <p>
+                        <input type="text" class="form-control form-control-sm" placeholder="https://">
+                      </p>
+
+                      <div class="form-group">
+                          <button class="btn btn-sm btn-primary" type="button">提交</button>
+                      </div>
+
+                      <div class="hr-line-dashed"></div>
+                      <div class="feed-activity-list">
+                        <div class="feed-element">
+                          <a href="#" class="pull-left">
+                            <img alt="image" class="img-circle" src="img/a1.jpg">
+                          </a>
+                          <div class="media-body ">
+                            <small class="pull-right text-navy">刚刚</small>
+                            <strong>释老毛</strong>
+                            <p>哈哈哈哈 现在流行这种说法</p>
+                          </div>
+                        </div>
+
+                        <div class="feed-element">
+                          <a href="#" class="pull-left">
+                            <img alt="image" class="img-circle" src="img/a2.jpg">
+                          </a>
+                          <div class="media-body ">
+                            <small class="pull-right">10分钟前</small>
+                            <strong>雪球社区</strong>
+                            <p>有几处语句麻烦改下</p>
+                          </div>
+                        </div>
+
+                        <div class="input-group">
+                          <input type="text" class="form-control">
+                          <span class="input-group-btn">
+                          <button type="button" class="btn btn-primary">发布</button>
+                          </span>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div id="tab-3" class="tab-pane">
+                      <div class="pull-right">
+                        <a href="javascript:;">编辑</a>
+                      </div>
+
+                      <h3>创意大纲</h3>
+                      <p>
+                        <a href="https://shimo.im/docs/njcbckIHiI4dvq2K" target="blank">
+                        https://shimo.im/docs/njcbckIHiI4dvq2K
+                        </a>
+                      </p>
+                      <div class="hr-line-dashed"></div>
+                      <div class="feed-activity-list">
+                        <div class="feed-element">
+                          <a href="#" class="pull-left">
+                            <img alt="image" class="img-circle" src="img/a1.jpg">
+                          </a>
+                          <div class="media-body ">
+                            <small class="pull-right text-navy">刚刚</small>
+                            <strong>释老毛</strong>
+                            <p>哈哈哈哈 现在流行这种说法</p>
+                          </div>
+                        </div>
+
+                        <div class="feed-element">
+                          <a href="#" class="pull-left">
+                            <img alt="image" class="img-circle" src="img/a2.jpg">
+                          </a>
+                          <div class="media-body ">
+                            <small class="pull-right">10分钟前</small>
+                            <strong>雪球社区</strong>
+                            <p>有几处语句麻烦改下</p>
+                          </div>
+                        </div>
+
+                        <div class="input-group">
+                          <input type="text" class="form-control">
+                          <span class="input-group-btn">
+                          <button type="button" class="btn btn-primary">发布</button>
+                          </span>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <div id="tab-7" class="tab-pane">
+                      <div class="form-group">
+                        <h3>合作评价</h3>
+                        <textarea class="form-control" rows="3"></textarea>
+                      </div>
+                      <button class="btn btn-sm btn-primary">提交</button>
+                    </div>
+
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>

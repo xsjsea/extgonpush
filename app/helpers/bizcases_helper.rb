@@ -1,0 +1,2 @@
+module BizcasesHelper
+end

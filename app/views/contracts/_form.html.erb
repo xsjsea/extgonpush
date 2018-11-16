@@ -1,0 +1,67 @@
+<%= form_with(model: contract, local: true) do |form| %>
+  <% if contract.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(contract.errors.count, "error") %> prohibited this contract from being saved:</h2>
+
+      <ul>
+      <% contract.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :creator_id %>
+    <%= form.number_field :creator_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :marketer_id %>
+    <%= form.number_field :marketer_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :campaigns_id %>
+    <%= form.number_field :campaigns_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contract_price %>
+    <%= form.text_field :contract_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :down_payment_date %>
+    <%= form.datetime_select :down_payment_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :down_payment %>
+    <%= form.text_field :down_payment %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rest_payment_date %>
+    <%= form.datetime_select :rest_payment_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rest_payment %>
+    <%= form.text_field :rest_payment %>
+  </div>
+
+  <div class="field">
+    <%= form.label :contract_image %>
+    <%= form.text_field :contract_image %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comment %>
+    <%= form.text_field :comment %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

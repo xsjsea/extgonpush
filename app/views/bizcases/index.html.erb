@@ -1,0 +1,51 @@
+<div id="page-wrapper" class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+        <div class="ibox-title">
+          <h5>案例列表</h5>
+        </div>
+
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-sm-3">
+              <a class="btn btn-sm btn-primary m-t-n-xs" href="/bizcases/new" role="button">
+                <strong>新增</strong>
+              </a>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>案例</th>
+                <th>链接</th>
+                <th>操作</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @bizcases.each_with_index do |bizcase,i| %>
+              <tr>
+                <td><%=(i+1)%></td>
+                <td><a href="javascript:void(0);"><%= bizcase.bizcase_title %></a></td>
+                 <td><a href="<%= bizcase.bizcase_link %>"><%= bizcase.bizcase_link %></a></td>
+                <td>
+                   <%= link_to '编辑', edit_bizcase_path(bizcase)%>
+                  <a href="/bizcases/destroy/<%=bizcase.id%>">删除</a>
+                  
+                </td>
+              </tr>
+              <% end %>
+               
+              </tbody>
+            </table>
+              <%=will_paginate @bizcases,:class=>"pagination",:previous_label=>"上一页",:next_label=>"下一页"%>
+          </div>
+        </div>
+        </div>
+      <div class="footer">
+        <div class="pull-right">
+          <strong>GonPush.com</strong> &copy; 2018
+        </div>
+      </div>
+    </div>

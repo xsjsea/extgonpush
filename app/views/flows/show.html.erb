@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Flow type:</strong>
+  <%= @flow.flow_type %>
+</p>
+
+<p>
+  <strong>Flow name:</strong>
+  <%= @flow.flow_name %>
+</p>
+
+<p>
+  <strong>Flow order:</strong>
+  <%= @flow.flow_order %>
+</p>
+
+<%= link_to 'Edit', edit_flow_path(@flow) %> |
+<%= link_to 'Back', flows_path %>

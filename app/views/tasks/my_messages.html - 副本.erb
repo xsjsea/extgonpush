@@ -1,0 +1,10 @@
+<pre name="code" class="ruby"><div class="user_page fdtl_page " id="will_page">  
+<%= will_paginate @messages, :container => false, :previous_label => '上一页', :next_label => '下一页', :inner_window => 2, :outer_window => 1 %>
+	
+</div>
+
+<script>    $(function () {       
+ $('#will_page a').attr('data-remote', 'true'); //指定分页为ajax请求   
+ });
+
+</script>

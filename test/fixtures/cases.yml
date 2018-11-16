@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  case_author: 1
+  case_date: MyString
+  case_title: MyString
+  case_content: MyString
+  case_status: MyString
+  case_modified: 2018-09-27 23:22:11
+  case_type: MyString
+
+two:
+  case_author: 1
+  case_date: MyString
+  case_title: MyString
+  case_content: MyString
+  case_status: MyString
+  case_modified: 2018-09-27 23:22:11
+  case_type: MyString

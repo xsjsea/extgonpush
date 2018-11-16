@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Creator Exts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Userid</th>
+      <th>Tags set</th>
+      <th>Avatar</th>
+      <th>Category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @creator_exts.each do |creator_ext| %>
+      <tr>
+        <td><%= creator_ext.userid %></td>
+        <td><%= creator_ext.tags_set %></td>
+        <td><%= creator_ext.avatar %></td>
+        <td><%= creator_ext.category_id %></td>
+        <td><%= link_to 'Show', creator_ext %></td>
+        <td><%= link_to 'Edit', edit_creator_ext_path(creator_ext) %></td>
+        <td><%= link_to 'Destroy', creator_ext, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Creator Ext', new_creator_ext_path %>

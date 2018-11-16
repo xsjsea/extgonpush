@@ -1,0 +1,2 @@
+class CreatorMetric < ApplicationRecord
+end

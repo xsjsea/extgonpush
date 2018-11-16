@@ -1,0 +1,42 @@
+<script>
+   function hasClass(ele, cls) { 
+        return ele.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'));
+    }
+   <%if @user==nil%>
+       var currentUserId=<%=user.id%>
+       var msgUserId=<%=message.user_id%>
+       var currentseq=<%= message.step_order %> ;
+       var tmpSeq=currentseq+1;
+       var obj=document.getElementById("tab-"+tmpSeq);
+      if(obj.classList.contains('active')){
+      }else{
+       document.getElementById("msg_"+currentseq).innerText =" ";
+      }    
+   <%else%>  
+   <%end%>
+   
+</script>
+<% cache message do %>
+<div class="feed-element">
+  <a href="javascript:void();" class="pull-left">
+    <%if @user==nil%>
+    <img alt="image" class="img-circle" src="/uploads/<%=user.avatar%>">
+   <%else%>
+    <img alt="image" class="img-circle" src="/uploads/<%=@user.avatar%>">
+   <%end%>
+  </a>
+  <div class="media-body ">
+    <small class="pull-right text-navy"><%=message.created_at.strftime("%Y-%m-%d %H:%M") %>
+    </small>
+
+    <%if @user==nil%>
+    <strong><%=user.username%></strong>
+   <%else%>
+    <strong><%=@user.username%></strong> 
+   <%end%>
+    
+    <p><%= message.content %></p>
+    <input type="hidden" id="step_order" value="<%= message.step_order %>"/>
+  </div>
+</div>
+<% end %>

@@ -1,0 +1,40 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+default: &default
+  # adapter: sqlite3
+  # pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # timeout: 5000
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: GP
+  username: root
+  password: "NBChinaAMO20180808$$"
+  host: 47.105.55.138
+  #host: sql.w237.vhostgo.com
+  #database: gopush
+  #username: root
+  #password: "root"
+  #host: 127.0.0.1
+  port: 3306
+
+development:
+  <<: *default
+  # database: db/development.sqlite3
+  #database: zyxhnkf
+  database: GP
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: db/test.sqlite3
+
+production:
+  <<: *default
+  database: db/production.sqlite3

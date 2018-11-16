@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tasks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Duration</th>
+      <th>Due date</th>
+      <th>Complete</th>
+      <th>testAdd</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.name %></td>
+        <td><%= task.description %></td>
+        <td><%= task.duration %></td>
+        <td><%= task.due_date %></td>
+        <td><%= task.complete %></td>
+        <td><%= task.testAdd %></td>
+        <td><%= link_to 'Show', task %></td>
+        <td><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%=will_paginate @tasks,:class=>"pagination",:previous_label=>"上一页",:next_label=>"下一页"%> 
+<div class="apple_pagination">
+  <div class="page_info">
+    <%= page_entries_info @tasks %>
+  </div>
+  <%= will_paginate @tasks, :container => false %>
+</div> 
+<br>
+
+<%= link_to 'New Task', new_task_path %>
