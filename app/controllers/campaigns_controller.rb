@@ -1,5 +1,5 @@
 class CampaignsController < ApplicationController
-  layout :admin_layout ,except:[:creatorinfo]
+  layout :admin_layout ,except:[:creatorinfo]  
   before_action :set_campaign, only: [:show, :edit, :update, :destroy]
    
   # GET /campaigns
@@ -105,10 +105,32 @@ end
 
   def creatorinfo
    @creator_id=params[:creator_id]
-   @campaign_id=params[:campaign_id]
-   @marketer_id=params[:marketer_id]
+   #@campaign_id=params[:campaign_id]
+   #@marketer_id=params[:marketer_id]
+   @user=User.find_by_id(@creator_id)
+ 
+
+   @metrics=CreatorMetric.select("creator_metrics.metric_name,creator_metrics.metric_value").joins("where creator_metrics.creator_id=#{@creator_id}")
+  # @tags=User.select(" user_tags.user_id,group_concat(tags.tag_name) show_tag_name").joins("left join user_tags on users.id=user_tags.user_id left join tags on user_tags.tag_id= tags.id where users.id=#{@creator_id} group by users.id")
+   @services =Service.select("services.id,services.service_name,services.service_description,services.service_price,services.extend_attribute").joins("where services.creator_id=#{@creator_id} and services.service_type=0")
+   @otherservices =Service.select("services.id,services.service_name,services.service_description,service_price").joins("where services.creator_id=#{@creator_id} and services.service_type=1")
+  
+   @bizcases =Bizcase.select("bizcases.id,bizcases.bizcase_title,bizcases.bizcase_link,users.username,bizcases.readed,bizcases.bizcase_content,bizcases.bizcase_img")
+    .joins("left join users on bizcases.bizcase_author=users.id where bizcases.bizcase_author=#{@creator_id}")
+   
+   @reports= Report.select("reports.report_title,reports.id,users.username,reports.report_source,reports.report_source,reports.report_content").joins("left join users on reports.report_author=users.id where reports.report_author=#{@creator_id}")
   end
 
+ def kol
+  @creators=User.select("users.id,users.username,users.description,users.avatar,IFNULL(v_socialaccounts.totalpraises,1000) totalpraises,IFNULL(v_socialaccounts.totalfans,1000) totalfans,IFNULL(v_socialaccounts.totalreaders,1000) totalreaders,IFNULL(v_services.min_service_price,1000) min_service_price")
+ .joins("left join v_socialaccounts on users.id = v_socialaccounts.creator_id left join v_services on users.id=v_services.creator_id where users.usertype='0' ") 
+  if @creators.length>0
+  creator_id=@creators[0].id
+  @creators = @creators.paginate(:page => params[:page], :per_page => 15)
+
+ end
+
+ end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_campaign

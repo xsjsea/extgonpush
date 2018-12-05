@@ -153,6 +153,12 @@ var filechange=function(event){
                 <div class="form-group"><label class="col-sm-2 control-label">一句话介绍 </label>
                   <div class="col-sm-10"><input type="text" id="user_description" name="user_description" class="form-control" value="<%=@userinfo[0].description%>" placeholder="如：某某创始人"></div>
                 </div>
+
+                 <div class="hr-line-dashed"></div>
+                <div class="form-group"><label class="col-sm-2 control-label">个人标签</label>
+                  <div class="col-sm-10"><input type="text" id="user_tag" name="user_tag" class="form-control" value="<%=@userinfo[0].tags%>" placeholder="如：多个标签，用逗号分隔"></div>
+                </div>
+
                 <div class="hr-line-dashed"></div>
                 <div class="form-group"><label class="col-sm-2 control-label">个人简介 </label>
                   <div class="col-sm-10"><textarea type="text" name="user_comment" id="user_comment" class="form-control" value="<%=@userinfo[0].user_comment%>"></textarea></div>

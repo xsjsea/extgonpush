@@ -94,7 +94,7 @@ class ReportsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def report_params
-      params.require(:report).permit(:report_author,:report_title, :report_source,:report_link   )
+      params.require(:report).permit(:report_author,:report_title, :report_source,:report_link,:report_content)
     end
      def products_layout 
        return 'creator'

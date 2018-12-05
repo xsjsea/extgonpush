@@ -38,6 +38,15 @@ end
       user_id=session[:user_id]
     respond_to do |format|
       if @bizcase.save
+         uploaded_io = params[:bizcase][:bizcase_img]
+        if uploaded_io !=nil 
+        File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+        file.write(uploaded_io.read)
+        @bizcase.update_attribute("bizcase_img",uploaded_io.original_filename)
+        end
+        else
+          @campaign.update_attribute("bizcase_img","") 
+        end
         getbizcases
         format.html { render :index, notice: 'Bizcase was successfully created.' }
         format.json { render :show, status: :created, location: @bizcase }
@@ -87,7 +96,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bizcase_params
-      params.require(:bizcase).permit(:bizcase_author, :bizcase_date, :bizcase_title, :bizcase_content, :bizcase_status, :bizcase_modified, :bizcase_type, :bizcase_link, :string)
+      params.require(:bizcase).permit(:bizcase_author, :bizcase_date, :bizcase_title, :bizcase_content, :bizcase_status, :bizcase_modified, :bizcase_type, :bizcase_link, :bizcase_content,:bizcase_img,:readed)
     end
      def products_layout 
        return 'creator'

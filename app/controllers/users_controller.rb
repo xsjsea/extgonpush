@@ -121,9 +121,9 @@ class UsersController < ApplicationController
     def userinfo
     current_user
     user_id=session[:user_id]
-    @userinfo=User.select("users.avatar,creator_exts.category_id,users.sex,users.username,users.description,users.user_comment,creator_exts.tags_set,users.nickname").joins("left join creator_exts on users.id= creator_exts.userid where users.id=#{user_id}")
+    @userinfo=User.select("users.avatar,creator_exts.category_id,users.sex,users.username,users.description,users.user_comment,creator_exts.tags_set,users.nickname,users.tags").joins("left join creator_exts on users.id= creator_exts.userid where users.id=#{user_id}")
     @user_categories=Category.select("categories.id,categories.name").joins("where categories.parent=6")
-      
+    #@tags=User.select(" user_tags.user_id,group_concat(tags.tag_name) show_tag_name").joins("left join user_tags on users.id=user_tags.user_id left join tags on user_tags.tag_id= tags.id where users.id=#{user_id} group by users.id")  
     
    end
     def marketerinfo
@@ -172,13 +172,15 @@ class UsersController < ApplicationController
      sex=params[:sex]
      user_description=params[:user_description]
      user_comment=params[:user_comment]
-    
+     user_tag=params[:user_tag]
+
 
     sch = User.find_by_id(user_id)
     sch.update_attribute('nickname',nickname)
     sch.update_attribute('sex', sex)
     sch.update_attribute('description',user_description)
     sch.update_attribute('user_comment', user_comment)
+    sch.update_attribute('tags', user_tag)
     if(user_avatar!=nil)
     sch.update_attribute('avatar', @filename)
     session[:avatar]=@filename
@@ -188,7 +190,7 @@ class UsersController < ApplicationController
     sch.update_attribute('category_id', usercategory)
 
     user_id=session[:user_id]
-    @userinfo=User.select("users.avatar,creator_exts.category_id,users.sex,users.username,users.description,users.user_comment,creator_exts.tags_set,users.nickname").joins("left join creator_exts on users.id= creator_exts.userid where users.id=#{user_id}")
+    @userinfo=User.select("users.avatar,creator_exts.category_id,users.sex,users.username,users.description,users.user_comment,creator_exts.tags_set,users.nickname,users.tags").joins("left join creator_exts on users.id= creator_exts.userid where users.id=#{user_id}")
     @user_categories=Category.select("categories.id,categories.name").joins("where categories.parent=6")
       
  respond_to do |format|
@@ -208,7 +210,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:status, :usertype, :username, :truename, :password)
+      params.require(:user).permit(:status, :usertype, :username, :truename, :password,:tags)
     end
     def products_layout 
     @user=User.find_by_id(session[:user_id]) 

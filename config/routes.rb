@@ -58,6 +58,7 @@ Rails.application.routes.draw do
  
   post '/upatesocialaccounts' , to:'social_accounts#upatesocialaccounts'
   get '/creatorinfo', to: 'campaigns#creatorinfo'
+  get '/kol', to: 'campaigns#kol'
   # root to: 'sessions#new'
   # Serve websocket cable requests in-process
   mount ActionCable.server => '/cable'
