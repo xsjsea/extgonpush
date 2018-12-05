@@ -78,7 +78,7 @@ class CreatorMetricsController < ApplicationController
     @creator_metric.destroy
     respond_to do |format|
        #@creator_metrics=CreatorMetric.select("creator_exts.avatar,creator_exts.category_id,users.sex,users.username,users.description,users.user_comment,creator_exts.tags_set").joins("left join creator_exts on users.id= creator_exts.userid where users.id=#{user_id}")
-      etcreator_metrics
+      getcreator_metrics
       format.html { render :index, notice: 'Creator metric was successfully destroyed.' }
       format.json { head :no_content }
     end

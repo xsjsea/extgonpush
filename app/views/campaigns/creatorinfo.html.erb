@@ -73,7 +73,7 @@
       <% @metrics.each_with_index do |metric,i| %>  
       <div class="col-md-2 text-center wow fadeInLeft">
         <i class="fa fa-weixin features-icon"></i>
-        <h2><%=metric.metric_value%>万</h2>
+        <h2><%=metric.metric_value%></h2>
         <p><%=metric.metric_name%></p>
       </div>
       <%end%>
@@ -546,11 +546,12 @@
 <script type="text/javascript">
   var str=$("#tags").val();
   var tagArr=str.split(",");
-  var weight=new Array();
+  /*var weight=new Array();*/
   var words =new Array();
   var colors =new Array();
   var speccolors =new Array();
-weight[0]=5;
+
+/*weight[0]=5;
 weight[1]=6;
 weight[2]=7;
 weight[3]=8;
@@ -558,7 +559,7 @@ weight[4]=9;
 weight[5]=10;
 weight[6]=11;
 weight[7]=12;
-weight[8]=13;
+weight[8]=13;*/
 
  colors[0]="#800026";
  colors[1]="#bd0026";
@@ -568,10 +569,12 @@ weight[8]=13;
  colors[5]="#feb24c";
  colors[6]="#fed976";
  colors[7]="#ffeda0";
+ colors[8]="#fed976";
+ colors[9]="#ffeda0";
   
 var len=tagArr.length;
 var words;
-if(len==1){
+/*if(len==1){
   words = [
     {text: tagArr[0], weight: weight[0]}];
 }
@@ -592,7 +595,7 @@ if(len==4){
     {text: tagArr[0], weight:  weight[0]},
     {text: tagArr[1], weight:  weight[1]},
     {text: tagArr[2], weight: weight[2]},
-     {text: tagArr[3], weight: weight[3]}
+    {text: tagArr[3], weight: weight[3]}
      ];
 }
 if(len==5){
@@ -603,8 +606,8 @@ if(len==5){
     {text: tagArr[3], weight: weight[3]},
     {text: tagArr[4], weight: weight[4]}
     ];
-}
-if(len==6){
+}*/
+/*if(len==6){
    words = [
     {text: tagArr[0], weight:  weight[0]},
     {text: tagArr[1], weight: weight[1]}, 
@@ -613,7 +616,19 @@ if(len==6){
     {text: tagArr[4], weight: weight[4]},
     {text: tagArr[5], weight: weight[5]}
     ];
-}
+}*/
+
+for(var i=0;i<len;i++){
+      //var arrvalue="{text:'"+tagArr[i]+"',weight:"+weight[i]+"}";
+      var arrvalue={"text":tagArr[i],"weight":i+5};
+      var k=i%10;
+      //var x=new Array();
+      //x[0]=text:+tagArr[i]+"'";
+      //x[1]="weight:"+weight[i]
+      //words[i]=x;
+      words[i]=arrvalue ;
+      speccolors[i]= colors[k];
+ }
 /*for(var i=0;i<len;i++){
       var arrvalue="{text:'"+tagArr[i]+"',weight:"+weight[i]+"}";
       var x=new Array();
