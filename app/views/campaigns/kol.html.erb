@@ -1,0 +1,27 @@
+<div id="page-wrapper" class="gray-bg">
+      <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="ibox-title">
+          <h5>原创方列表</h5>
+        </div>
+        <div class="ibox-content">
+          <div class="clients-list">
+            <div class="full-height-scroll">
+                <%= render 'kols' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="pull-right">
+          <strong>GonPush.com</strong> &copy; 2018
+        </div>
+      </div>
+        <script>
+        function checkkol(creatorid){
+           window.location.href="/creatorinfo?creator_id="+creatorid;
+        }
+      </script>
+
+ 
+
+ 
