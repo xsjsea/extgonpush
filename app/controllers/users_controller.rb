@@ -97,15 +97,21 @@ class UsersController < ApplicationController
   end
    def inviterequired
     current_user
-    user_id=session[:user_id]
-    @inviterequired=CreatorExt.find_by_userid(user_id)
+    @user_id=session[:user_id]
+    user=User.find_by_id(@user_id)
+    if user.usertype=="-1"
+      session[:reluser_id]=params[:creator_id]
+      @user_id=session[:reluser_id]
+    end
+    @inviterequired=CreatorExt.find_by_userid(@user_id)
 
    end
    def saveinviterequired
     current_user
     inviterequired =params[:inviterequired]
     productselected =params[:productselected]
-    CreatorExt.where(userid: session[:user_id]).update_all(inviterequired: inviterequired,productselected:productselected)
+    userid=params[:user_id]
+    CreatorExt.where(userid: userid).update_all(inviterequired: inviterequired,productselected:productselected)
    end
    def updatepassword
     current_user
@@ -128,7 +134,12 @@ class UsersController < ApplicationController
    end
     def marketerinfo
     current_user
+
     user_id=session[:user_id]
+    user=User.find_by_id(user_id)
+    if user.usertype=="-1"
+      user_id=params[:marketerid]
+    end
     @marketerinfo=User.select("marketer_exts.id,marketer_exts.taxcode,marketer_exts.bankname,marketer_exts.bankaccount,marketer_exts.companyname,marketer_exts.companyaddress,marketer_exts.contactname,marketer_exts.contactmobile").joins("left join marketer_exts on users.id= marketer_exts.userid where marketer_exts.userid=#{user_id}")
    end
 
@@ -214,10 +225,12 @@ class UsersController < ApplicationController
     end
     def products_layout 
     @user=User.find_by_id(session[:user_id]) 
-    if @user.usertype=="0"
-       return 'creator'
-    else
+    if @user.usertype=="-1"
+       return 'admin'
+    elsif @user.usertype=="1"
       return 'marketer'
+    else
+      return 'creator'
     end
    
  end  

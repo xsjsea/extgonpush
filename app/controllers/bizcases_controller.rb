@@ -63,6 +63,12 @@ end
     user_id=session[:user_id]
     respond_to do |format|
       if @bizcase.update(bizcase_params)
+        uploaded_io = params[:bizcase][:bizcase_img]
+        if uploaded_io !=nil 
+        File.open(Rails.root.join('public', 'uploads', uploaded_io.original_filename), 'wb') do |file|
+        file.write(uploaded_io.read)
+        @bizcase.update_attribute("bizcase_img",uploaded_io.original_filename)
+        end
         getbizcases
         format.html { render :index, notice: 'Bizcase was successfully updated.' }
         format.json { render :show, status: :ok, location: @bizcase }
@@ -72,6 +78,7 @@ end
       end
     end
   end
+end
 
   # DELETE /bizcases/1
   # DELETE /bizcases/1.json

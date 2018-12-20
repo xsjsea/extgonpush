@@ -118,10 +118,12 @@ end
    @bizcases =Bizcase.select("bizcases.id,bizcases.bizcase_title,bizcases.bizcase_link,users.username,bizcases.readed,bizcases.bizcase_content,bizcases.bizcase_img")
     .joins("left join users on bizcases.bizcase_author=users.id where bizcases.bizcase_author=#{@creator_id}")
    
-   @reports= Report.select("reports.report_title,reports.id,users.username,reports.report_source,reports.report_source,reports.report_content").joins("left join users on reports.report_author=users.id where reports.report_author=#{@creator_id}")
+   @reports= Report.select("reports.report_title,reports.id,users.username,reports.report_source,reports.report_source,reports.report_content,reports.report_link").joins("left join users on reports.report_author=users.id where reports.report_author=#{@creator_id}")
   end
 
  def kol
+   user_id=session[:user_id]
+  @user=User.find_by_id(user_id)
   @creators=User.select("users.id,users.username,users.description,users.avatar,IFNULL(v_socialaccounts.totalpraises,1000) totalpraises,IFNULL(v_socialaccounts.totalfans,1000) totalfans,IFNULL(v_socialaccounts.totalreaders,1000) totalreaders,IFNULL(v_services.min_service_price,1000) min_service_price")
  .joins("left join v_socialaccounts on users.id = v_socialaccounts.creator_id left join v_services on users.id=v_services.creator_id where users.usertype='0' ") 
   if @creators.length>0
@@ -129,7 +131,13 @@ end
   @creators = @creators.paginate(:page => params[:page], :per_page => 15)
 
  end
-
+end
+ def marketer
+  @marketers=User.select("users.id,users.username,users.description")
+ .joins("where users.usertype='1' ") 
+  if @marketers.length>0
+  @marketers = @marketers.paginate(:page => params[:page], :per_page => 15)
+ end
  end
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -143,12 +151,17 @@ end
       params.require(:campaign).permit(:name, :description, :start, :budget,:user_id,:industry,:collaboration_mode,:attachment)
     end
 
-    def admin_layout
-      # Check if logged in, because current_user could be nil.
-      if(1==1)
-        "marketer"
-      else
-        "application"
-      end
+      
+
+    def admin_layout 
+    @user=User.find_by_id(session[:user_id]) 
+    if @user.usertype=="-1"
+       return 'admin'
+    elsif @user.usertype=="1"
+      return 'marketer'
+    else
+      return 'application'
     end
+   
+ end 
 end

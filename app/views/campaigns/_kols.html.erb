@@ -26,7 +26,19 @@
                             <td id="fans_<%=i%>"> <%=creator.totalfans%></td>
                             <td id="reader_<%=i%>"> <%=creator.totalreaders%></td>
                             <td id="price_<%=i%>"><%=creator.min_service_price%></td>
-                            <td class="client-status" ><span onclick="checkkol(<%=creator.id%>)">查看</span></td>
+                            <%if @user.usertype=="1"%>
+                            <td class="client-status" ><a href="#" onclick="checkkol(<%=creator.id%>)">查看</a></td>
+                            <%elsif @user.usertype=="-1"%>
+
+                               <td class="client-status" >
+                                <a href="#" onclick="checkkol(<%=creator.id%>)">查看</a> 
+                                <a href="#" onclick="editInfo(<%=creator.id%>,'price')">设置报价</a> 
+                               
+                                 <a href="#" onclick="editInfo(<%=creator.id%>,'service')">接单</a> 
+                                    <a href="#" onclick="editInfo(<%=creator.id%>,'account')">粉丝账号</a> 
+                                    <a href="#" onclick="editInfo(<%=creator.id%>,'metric')">粉丝画像</a></td>
+
+                            <%end%>   
                          </tr>
                         <% end %>
                     </tbody>

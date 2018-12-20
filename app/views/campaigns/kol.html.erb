@@ -20,6 +20,18 @@
         function checkkol(creatorid){
            window.location.href="/creatorinfo?creator_id="+creatorid;
         }
+        function editInfo(creatorid,type){
+          if(type=='price'){
+           window.location.href="/inviterequired?creator_id="+creatorid;
+         }else if(type=='service'){
+window.location.href="/services?creator_id="+creatorid;
+         }else if(type=='account'){
+window.location.href="/social_accounts?creator_id="+creatorid;
+         }
+         else if(type=='metric'){
+window.location.href="/creator_metrics?creator_id="+creatorid;
+         }
+          }
       </script>
 
  

@@ -10,9 +10,11 @@ class OrdersController < ApplicationController
   def index
       @user=User.find_by_id(session[:user_id])
       orderstatus=params[:status]
-      userId=@user.id
+      if @user.usertype=="-1"
+        @orders =Order.select( "orders.status,campaigns.name,campaigns.budget,campaigns.start,orders.id, users.username,users.avatar").joins("LEFT JOIN campaigns  on orders.campaign_id=campaigns.id  LEFT JOIN users on orders.creator_id=users.id  LEFT JOIN creator_exts  on creator_exts.userid=users.id  order by orders.id desc")
       
-    
+      else
+      userId=@user.id
     if orderstatus == nil
      if @user.usertype=="0"
         #@orders = Order.find_by_creator_id(@user.id)
@@ -40,6 +42,8 @@ class OrdersController < ApplicationController
          @orders =Order.select("orders.status,campaigns.name,campaigns.budget,campaigns.start,orders.id,users.username,users.avatar").joins("LEFT JOIN campaigns  on orders.campaign_id=campaigns.id  LEFT JOIN users on orders.creator_id=users.id  left join creator_exts  on creator_exts.userid=users.id where orders.marketer_id=#{userId} and orders.status=#{orderstatus} order by orders.id desc")
  
       end
+  end
+
   end
    @orders = @orders.paginate(:page => params[:page], :per_page => 30)
 end
@@ -183,7 +187,7 @@ def showOrder
      elsif(@user.usertype=='1')
      @unreadmessages=Message.select("count(*) total,step_order").joins("where order_id=#{currentorder_id}  and marketerstatus='1' group by order_id,step_order")
      else
-     @unreadmessages=Message.select("count(*) total,step_order").joins("where order_id=#{currentorder_id} and (marketerstatus='1' or  creatorstatus='1' ) and marketerstatus='1' group by order_id,step_order")
+     @unreadmessages=Message.select("count(*) total,step_order").joins("where order_id=#{currentorder_id} and marketerstatus='-1' group by order_id,step_order")
      end
      @mestotal_1=0;
      @mestotal_2=0;
@@ -347,8 +351,10 @@ def updatepost
     @user=User.find_by_id(session[:user_id]) 
     if @user.usertype=="0"
        return 'creator'
-    else
+    elsif @user.usertype=="1"
       return 'marketer'
+    else
+      return 'admin'
     end
    
  end  

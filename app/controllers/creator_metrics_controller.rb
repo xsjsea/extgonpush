@@ -5,6 +5,10 @@ class CreatorMetricsController < ApplicationController
 
   def getcreator_metrics
     user_id=session[:user_id]
+    user=User.find_by_id(user_id)
+    if user.usertype=="-1"
+      user_id=session[:reluser_id]
+    end
     @creator_metrics=CreatorMetric.select("creator_metrics.id,creator_metrics.metric_name,creator_metrics.metric_value")
     .joins("where creator_id=#{user_id}")
    @creator_metrics = @creator_metrics.paginate(:page => params[:page], :per_page => 10)
@@ -16,7 +20,18 @@ class CreatorMetricsController < ApplicationController
   def index
    # @creator_metrics = CreatorMetric.all
    current_user
-   getcreator_metrics
+   #getcreator_metrics
+    user_id=session[:user_id]
+    user=User.find_by_id(user_id)
+    if user.usertype=="-1"
+      user_id=params[:creator_id] 
+      session[:reluser_id]=user_id
+    end
+
+   @creator_metrics=CreatorMetric.select("creator_metrics.id,creator_metrics.metric_name,creator_metrics.metric_value")
+    .joins("where creator_id=#{user_id}")
+   @creator_metrics = @creator_metrics.paginate(:page => params[:page], :per_page => 10)
+
     #@creator_metrics=CreatorMetric.select("creator_metrics.id, metrics.name,creator_metrics.metric_value")
     #.joins("left join metrics on creator_metrics.metric_id = metrics.id where creator_metrics.creator_id=#{user_id}")
      
@@ -29,19 +44,28 @@ class CreatorMetricsController < ApplicationController
 
   # GET /creator_metrics/new
   def new
+     user_id=session[:user_id]
+       user=User.find_by_id(user_id)
+    if user.usertype=="-1"
+      @user_id=session[:reluser_id]
+    end
     @creator_metric = CreatorMetric.new
   end
 
   # GET /creator_metrics/1/edit
   def edit
-
+    user_id=session[:user_id]
+    user=User.find_by_id(user_id)
+    if user.usertype=="-1"
+      @user_id=session[:reluser_id]
+    end
   end
 
   # POST /creator_metrics
   # POST /creator_metrics.json
   def create
+   
     @creator_metric = CreatorMetric.new(creator_metric_params)
-    user_id=session[:user_id]
     respond_to do |format|
       if @creator_metric.save
        #  @creator_metrics=CreatorMetric.select("creator_exts.avatar,creator_exts.category_id,users.sex,users.username,users.description,users.user_comment,creator_exts.tags_set").joins("left join creator_exts on users.id= creator_exts.userid where users.id=#{user_id}")
@@ -58,7 +82,7 @@ class CreatorMetricsController < ApplicationController
   # PATCH/PUT /creator_metrics/1
   # PATCH/PUT /creator_metrics/1.json
   def update
-      user_id=session[:user_id]
+ 
     respond_to do |format|
       if @creator_metric.update(creator_metric_params)
         getcreator_metrics
@@ -74,7 +98,7 @@ class CreatorMetricsController < ApplicationController
   # DELETE /creator_metrics/1
   # DELETE /creator_metrics/1.json
   def destroy
-    user_id=session[:user_id]
+ 
     @creator_metric.destroy
     respond_to do |format|
        #@creator_metrics=CreatorMetric.select("creator_exts.avatar,creator_exts.category_id,users.sex,users.username,users.description,users.user_comment,creator_exts.tags_set").joins("left join creator_exts on users.id= creator_exts.userid where users.id=#{user_id}")
@@ -100,10 +124,12 @@ class CreatorMetricsController < ApplicationController
 
      def products_layout 
     @user=User.find_by_id(session[:user_id]) 
-    if @user.usertype=="0"
+   if @user.usertype=="0"
        return 'creator'
-    else
+    elsif @user.usertype=="1"
       return 'marketer'
+    else
+      return 'admin'
     end
    
  end  

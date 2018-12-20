@@ -1,0 +1,27 @@
+<div id="page-wrapper" class="gray-bg">
+      <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="ibox-title">
+          <h5>需求方列表</h5>
+        </div>
+        <div class="ibox-content">
+          <div class="clients-list">
+            <div class="full-height-scroll">
+                <%= render 'marketers' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="pull-right">
+          <strong>GonPush.com</strong> &copy; 2018
+        </div>
+      </div>
+        <script>
+        function checkmarketer(marketerid){
+           window.location.href="/marketerinfo?marketerid="+marketerid;
+        }
+      </script>
+
+ 
+
+ 

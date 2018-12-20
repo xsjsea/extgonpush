@@ -11,23 +11,23 @@ default: &default
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  #database: GP
-  #username: root
-  #password: "NBChinaAMO20180808$$"
-  #host: 47.105.55.138
-  #host: sql.w237.vhostgo.com
-  database: po
+  database: UATGP
   username: root
-  password: "root"
-  host: 127.0.0.1
+  password: "NBChinaAMO20180808$$"
+  host: 47.105.55.138
+  #host: sql.w237.vhostgo.com
+  #database: po
+  #username: root
+  #password: "root"
+  #host: 127.0.0.1
   port: 3306
 
 development:
   <<: *default
   # database: db/development.sqlite3
   #database: zyxhnkf
-  #database: GP
-  database: po
+  database: UATGP
+  #database: po
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

@@ -163,7 +163,7 @@
       <div class="col-lg-10 col-lg-offset-1 slick_demo_1">
          <% @reports.each_with_index do |report,i| %>  
         <div>
-          <a target="_blank" href="<%=report.report_source%>">
+          <a target="_blank" href="<%=report.report_link%>">
           <h2><%=report.report_title%></h2>
           <p>
             <%=report.report_content%> 

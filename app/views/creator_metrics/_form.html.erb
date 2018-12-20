@@ -15,7 +15,7 @@
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
-                  <%= form.hidden_field :creator_id,:value =>session['user_id']%>
+                  <%= form.hidden_field :creator_id,:value =>@user_id%>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-2">
                        <%= form.submit '保存',class:'btn btn-primary'%>

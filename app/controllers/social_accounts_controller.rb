@@ -6,14 +6,29 @@ class SocialAccountsController < ApplicationController
   # GET /social_accounts
   # GET /social_accounts.json
   def getsocial_accounts
-     user_id=session[:user_id]
+       @user_id=session[:user_id]
+       user=User.find_by_id(@user_id)
+    if user.usertype=="-1"
+      @user_id=session[:reluser_id]
+    end
      @social_accounts = SocialAccount.select("social_accounts.fans,social_accounts.readers,social_accounts.praises,social_accounts.comments, 
 social_accounts.channel_id,social_accounts.nickname,social_accounts.id,social_accounts.creator_id,social_channels.name channel_name")
-     .joins(" left join social_channels on social_accounts.channel_id=social_channels.id where social_accounts.creator_id=#{user_id}")
+     .joins(" left join social_channels on social_accounts.channel_id=social_channels.id where social_accounts.creator_id=#{@user_id}")
      @social_accounts = @social_accounts.paginate(:page => params[:page], :per_page => 10) 
   end
   def index
-     getsocial_accounts
+     #getsocial_accounts
+       @user_id=session[:user_id]
+       @user=User.find_by_id(@user_id)
+    if @user.usertype=="-1"
+      @user_id=params[:creator_id] 
+      session[:reluser_id]=@user_id
+    end
+     @social_accounts = SocialAccount.select("social_accounts.fans,social_accounts.readers,social_accounts.praises,social_accounts.comments, 
+social_accounts.channel_id,social_accounts.nickname,social_accounts.id,social_accounts.creator_id,social_channels.name channel_name")
+     .joins(" left join social_channels on social_accounts.channel_id=social_channels.id where social_accounts.creator_id=#{@user_id}")
+     @social_accounts = @social_accounts.paginate(:page => params[:page], :per_page => 10) 
+ 
      #@social_accounts = SocialAccount.all
      #user_id=session[:user_id]
      #@social_accounts = SocialAccount.select("social_accounts.fans,social_accounts.readers,social_accounts.praises,social_accounts.comments, 
@@ -28,12 +43,22 @@ social_accounts.channel_id,social_accounts.nickname,social_accounts.id,social_ac
 
   # GET /social_accounts/new
   def new
+       @user_id=session[:user_id]
+       @user=User.find_by_id(@user_id)
+    if @user.usertype=="-1"
+      @user_id=session[:reluser_id]
+    end
     @social_account = SocialAccount.new
     @social_channels =SocialChannel.all
   end
 
   # GET /social_accounts/1/edit
   def edit
+      @user_id=session[:user_id]
+       user=User.find_by_id(@user_id)
+    if user.usertype=="-1"
+      @user_id=session[:reluser_id]
+    end
      @social_channels =SocialChannel.all
   end
 
@@ -139,7 +164,13 @@ social_accounts.channel_id,social_accounts.nickname,social_accounts.id,social_ac
     end
     def products_layout 
     
+       if @user.usertype=="0"
        return 'creator'
+    elsif @user.usertype=="1"
+      return 'marketer'
+    else
+      return 'admin'
+    end
     
     end
 end

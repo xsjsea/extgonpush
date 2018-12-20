@@ -6,6 +6,16 @@
                   </div>
                 </div>
                 <div class="hr-line-dashed"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">套餐类型</label>
+                        <div class="col-sm-10">
+                           <%= form.radio_button(:service_type, 
+                           0)%> 制作+投放
+                            <%= form.radio_button(:service_type, 
+                           1)%> 投放
+                        </div>
+                      </div>
+                <div class="hr-line-dashed"></div>
 
                 <div class="form-group"><label class="col-sm-2 control-label">报价 </label>
                   <div class="col-sm-10">
@@ -24,7 +34,7 @@
                 </div>
                 <div class="hr-line-dashed"></div>
                 
-                   <%= form.hidden_field :creator_id,:value =>session['user_id']%>
+                   <%= form.hidden_field :creator_id,:value =>@user_id%>
                 <div class="form-group">
                     <div class="col-sm-4 col-sm-offset-2">
                           <%= form.submit '保存',class:'btn btn-primary'%>
