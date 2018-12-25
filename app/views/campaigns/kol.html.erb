@@ -6,8 +6,55 @@
         <div class="ibox-content">
           <div class="clients-list">
             <div class="full-height-scroll">
-                <%= render 'kols' %>
+                 
+              <div class="table-responsive">
+                  <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>KOL</th>
+                      
+                      <th>粉丝数</th>
+                      <th>阅读数</th>
+                      <th>价格</th>
+                      <!-- <th>状态</th>
+                      <th>创建日期</th> -->
+                      <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <%@creators.each_with_index do |creator,i| %>
+                           <tr id="r_<%=i%>">
+                            <td class="client-avatar"><img  alt="image" 
+                              src="/uploads/<%=creator.avatar%>" 
+                              onerror="this.src='/uploads/default_small.png'"> 
+                            </td>
+                            <td><a data-toggle="tab" href="#contact-1" 
+                              class="client-link" id="usrName_<%=i%>"><%=creator.username%></a></td>
+                            <td id="fans_<%=i%>"> <%=creator.totalfans%></td>
+                            <td id="reader_<%=i%>"> <%=creator.totalreaders%></td>
+                            <td id="price_<%=i%>"><%=creator.min_service_price%></td>
+                            <%if @user.usertype=="1"%>
+                            <td class="client-status" ><a href="#" onclick="checkkol(<%=creator.id%>)">查看</a></td>
+                            <%elsif @user.usertype=="-1"%>
+
+                               <td class="client-status" >
+                                <a href="#" onclick="checkkol(<%=creator.id%>)">查看</a> 
+                                <a href="#" onclick="editInfo(<%=creator.id%>,'price')">设置报价</a> 
+                               
+                                 <a href="#" onclick="editInfo(<%=creator.id%>,'service')">接单</a> 
+                                    <a href="#" onclick="editInfo(<%=creator.id%>,'account')">粉丝账号</a> 
+                                    <a href="#" onclick="editInfo(<%=creator.id%>,'metric')">粉丝画像</a></td>
+
+                            <%end%>   
+                         </tr>
+                        <% end %>
+                    </tbody>
+                  </table>
+                    <%=will_paginate @creators,:class=>"pagination",:previous_label=>"上一页",:next_label=>"下一页"%>
+              </div>
             </div>
+
           </div>
         </div>
       </div>
